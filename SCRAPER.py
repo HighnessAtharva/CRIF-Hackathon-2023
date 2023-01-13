@@ -97,19 +97,19 @@ def scrape_news(organization: str) -> list:
 def write_to_csv(organization: str, all_articles: dict) -> None:
     with open(f'CSVs/{organization}.csv', 'w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["Article", "Title", "Description", "PublishedAt", "URL", "Content"])
+        writer.writerow(["Article", "Title", "Description",  "URL", "Content"])
 
         for idx, article in enumerate(all_articles['articles']):
             title= article['title'].strip()
             description= article['description'].strip()
-            publishedAt= article['publishedAt']
+            # publishedAt= article['publishedAt']
             newsURL= article['url']
             
             content= parse_text_from_web(newsURL)
             content=cleanup_text(content)
         
             # download the content from the url
-            writer.writerow([idx, article['title'], article['description'], article['publishedAt'], article['url'], content])
+            writer.writerow([idx, article['title'], article['description'], article['url'], content])
             
             print(f"[bold]Wrote {idx} -{title} to {organization}.csv[/bold]")
             
