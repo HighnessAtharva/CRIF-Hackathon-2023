@@ -21,4 +21,8 @@ Analyse the articles and carve out sentences(context) where reputation risk elem
 Can use dependency parsing or predicate classifiers to establish relationships between risk elements and company names
 
 4. **Dashboard** -
-Display these relationships is an appropriate Dashboard => PowerBI / Tableau
+Display these relationships in an appropriate Dashboard => PowerBI / Tableau
+
+
+*todo*
+create questions regarding the keywords and data facts 
