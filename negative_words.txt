@@ -572,8 +572,6 @@ clique
 clog
 clogged
 clogs
-cloud
-clouding
 cloudy
 clueless
 clumsy
@@ -601,7 +599,6 @@ complaining
 complains
 complaint
 complaints
-complex
 complicated
 complication
 complicit
@@ -1330,7 +1327,6 @@ downturns
 drab
 draconian
 draconic
-drag
 dragged
 dragging
 dragoon

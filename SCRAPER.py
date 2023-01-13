@@ -95,9 +95,9 @@ def scrape_news(organization: str) -> list:
 # WRITE TO CSV            #
 # =========================
 def write_to_csv(organization: str, all_articles: dict) -> None:
-    with open(f'{organization}.csv', 'w', encoding='utf-8', newline='') as file:
+    with open(f'CSVs/{organization}.csv', 'w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["Title", "Description", "PublishedAt", "URL", "Content"])
+        writer.writerow(["Article", "Title", "Description", "PublishedAt", "URL", "Content"])
 
         for idx, article in enumerate(all_articles['articles']):
             title= article['title'].strip()
@@ -109,7 +109,7 @@ def write_to_csv(organization: str, all_articles: dict) -> None:
             content=cleanup_text(content)
         
             # download the content from the url
-            writer.writerow([article['title'], article['description'], article['publishedAt'], article['url'], content])
+            writer.writerow([idx, article['title'], article['description'], article['publishedAt'], article['url'], content])
             
             print(f"[bold]Wrote {idx} -{title} to {organization}.csv[/bold]")
             
@@ -190,10 +190,10 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
 
 
 
-    with open(f'{organization}-processed.csv', 'w', encoding='utf-8', newline='') as summary:
+    with open(f'CSVs/{organization}-processed.csv', 'w', encoding='utf-8', newline='') as summary:
         
         # read first row from Uber.csv
-        with open(f'{organization}.csv', 'r', encoding='utf-8') as file:
+        with open(f'CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
             try:
                 reader = csv.reader(file)
                 next(reader)
@@ -285,7 +285,7 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
 
 def visualize(organization):
     raw_text = ''
-    with open('{organization}.csv', 'r', encoding='utf-8') as file:
+    with open('CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)
         
@@ -296,7 +296,15 @@ def visualize(organization):
         nlp_text = nlp(raw_text)
         displacy.serve(nlp_text, style="ent")
 
-
+def merge_csv(csv1, csv2, organization):
+    import pandas as pd
+    df1 = pd.read_csv(csv1)
+    df2 = pd.read_csv(csv2) 
+    df = pd.merge(df1, df2, on='Article')
+    df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
+    print(f"CSVs merged to {organization}-ANALYSIS.csv")
+    
+    
 # sourcery skip: identity-comprehension
 nlp = spacy.load("en_core_web_trf")
 
@@ -306,15 +314,21 @@ import os
 print("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]")
 organization=input()
 
-if os.path.exists(path=f'{organization}.csv'):
+if os.path.exists(path=f'CSVs/{organization}.csv'):
     print(f"Found {organization}.csv")
     
 else:
     articles=scrape_news(organization)
     write_to_csv(organization, articles)
 
-if os.path.exists(path=f'{organization}-processed.csv'):
+
+if os.path.exists(path=f'CSVs/{organization}-processed.csv'):
     print(f"Found {organization}-processed.csv")
 else:
     process_csv(organization)
+
+file1=f'CSVs/{organization}.csv'
+file2=f'CSVs/{organization}-processed.csv'
+merge_csv(file1, file2, organization)
+
 

@@ -553,7 +553,6 @@ honk
 honkers
 honkey
 honky
-hook
 hooker
 hookers
 hooters
