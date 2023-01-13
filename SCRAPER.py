@@ -305,6 +305,37 @@ def merge_csv(csv1, csv2, organization):
     print(f"CSVs merged to {organization}-ANALYSIS.csv")
     
     
+    
+# RUN SAME FUNCTION TWICE 
+def final_cleanup(organization):
+    import pandas as pd
+    df = pd.read_csv(f'CSVs/{organization}-ANALYSIS.csv')
+    
+
+    # write - to empty cells in offensive words
+    df['Offensive Words'] = df['Offensive Words'].fillna('-')
+    
+    # write - to empty cells in negative words 
+    df['Negative Words'] = df['Negative Words'].fillna('-')
+     
+    # write - to empty cells in tags
+    df['Tags'] = df['Tags'].fillna('-')
+    
+    # clean up tags
+    df['Tags'] = df['Tags'].str.replace('[', '').str.replace(']', '').str.replace("'", '')
+    
+    # clean up offensive words
+    df['Offensive Words'] = df['Offensive Words'].str.replace('[', '').str.replace(']', '').str.replace("'", '')
+    
+    # clean up negative words
+    df['Negative Words'] = df['Negative Words'].str.replace('[', '').str.replace(']', '').str.replace("'", '')
+    
+   
+    
+    
+    df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
+    print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")
+    
 # sourcery skip: identity-comprehension
 nlp = spacy.load("en_core_web_trf")
 
@@ -332,3 +363,7 @@ file2=f'CSVs/{organization}-processed.csv'
 merge_csv(file1, file2, organization)
 
 
+orgranizations= ['snapchat', 'reddit', 'reliance', 'swiggy', 'tinder', 'titan', 'twitch']
+
+for org in orgranizations:
+    final_cleanup(org)
