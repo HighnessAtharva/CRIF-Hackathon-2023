@@ -1,0 +1,38 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,No Headline,Extremely Negative,190,[],[],[]
+2,"Software Update Arrives for Nokia G60, X10, and X20",Somewhat Positive,0,[],[],[]
+3,Google Urges Apple Not to 'Drop the Ball' on Fixing Messaging in New Billboard Pushing RCS,Extremely Negative,270,"['plea', 'pleas', 'lone']",['bigger'],"[Aaron, aaronp613, Tim, Cook, Cook]"
+4,Nokia Kicks Off 2023 with Two New Phones for US Markets,Extremely Negative,190,[],[],[]
+5,Android 13 Comes to More Nokia Phones,Extremely Positive,0,[],[],"[Lars, Silberbauer]"
+6,CES technology trade show adopts social theme,Extremely Positive,60,"['decline', 'problems']",['laid'],"[John, May, May, Walt, Stinson, Ketan, Patel, Patel, Garry, Jacobs, Jacobs]"
+7,Qatar’s forgotten migrant workers stuck in a ‘prison where you can work’,Extremely Positive,450,"['hard', 'strain', 'concern', 'hard', 'fruitless', 'congestion', 'bleak', 'unsettling', 'difficult', 'drab', 'harsh', 'glare', 'rough', 'concern', 'toughness', 'prison', 'complained', 'worst', 'bunk', 'alarm', 'danger', 'lonely', 'bored', 'bad', 'badly', 'problem', 'abuses', 'missed', 'fatigue', 'critical', 'racism', 'garbage', 'discrimination', 'worry', 'subjected', 'hard']","['African', 'shit']","[Isaac, Emmanuel, Lionel, Messi, Isaac, Isaac, Emmanuel, Isaac, Moses, Moses, Moses, Moses, Mosess, Moses, Geoffrey, Geoffrey, Geoffrey, Geoffrey, Isaac, Isaac, Isaac, Kwame, Geoffrey, Moses, Geoffrey, Isaac]"
+8,How to drag and drop between apps on Android tablets,Extremely Positive,90,"['drag', 'Breaking', 'drag', 'drag', 'issues', 'drag', 'unable', 'drag', 'limited', 'problem']",[],"[Michael, MichaelLHicks]"
+9,No Headline,Extremely Negative,200,['Risk'],[],"[Herman, Mark, Schwartzphenomenalworld]"
+10,Blackview BV7100 review: A cheap rugged phone for your unpredictable lifestyle,Extremely Negative,830,"['lacks', 'rival', 'gimmicks', 'resistance', 'Cons', 'Bulky', 'gimmicks', 'poor', 'clumsy', 'slashing', 'difficult', 'scratched', 'insanely', 'drain', 'devoid', 'gimmicky', 'scratches', 'scuffs', 'downsides', 'drawbacks', 'uncomfortable', 'bulky', 'lag', 'lack', 'limited', 'mediocre', 'limitation', 'lack', 'ruined', 'culprit', 'expensive', 'hard', 'rival', 'expensive', 'downside', 'bulkiness', 'punch', 'critical', 'temper', 'dust', 'worry', 'gimmicks', 'falling', 'problem']","['abuse', 'kill', 'shooting', 'shooting']","[Jay, Bonggolto]"
+11,The history of cell phones: A decade-by-decade timeline,Extremely Positive,270,"['bulky', 'suffered', 'drawbacks', 'lackluster', 'limitations', 'limited', 'rival', 'susceptible', 'noise', 'static', 'intense', 'infamous', 'unbelievably', 'split', 'recession', 'fall', 'resistance', 'slowed']","['German', 'fear']","[Martin, Cooper, Joel, S., Engel]"
+12,"
+		Moto G Play (2023) review: no fun here	",Extremely Negative,670,"['stuttering', 'worry', 'accidental', 'confused', 'hate', 'disappointing', 'cheap', 'weird', 'swipe', 'blurry', 'stuttering', 'laggy', 'sluggish', 'stuttering', 'limited', 'pain', 'lost', 'blur', 'hard', 'blurry', 'pinch', 'pain', 'dirt', 'cheap', 'baffling', 'frustrating', 'lag', 'stuttering', 'choppy', 'puzzled', 'lacking', 'cheap', 'unfortunately']","['dead', 'dead', 'dead']",[]
+13,Nokia Stock Poised For Recovery After Dismal Week?,Extremely Negative,240,"['worse', 'worse', 'lost', 'lost', 'lost']",[],[]
+14,"
+		          10 Friday AM Reads		        ",Extremely Positive,270,"['recession', 'worries', 'threaten', 'slashing', 'burden', 'wrong', 'difficult', 'impossible', 'Risk', 'Strangely', 'unlikely', 'Ignore', 'crisis']","['Japanese', 'Attack', 'fight']","[Ron, DeSantiss, Donald, Trumpand, Joel, Embiids, Jo, Rubin, Embiid, Jo, John, Mack, Dean, Witter]"
+15,Working out with Apple Watch? These smart scales sync weight with iPhone,Extremely Positive,200,"['trick', 'confusing', 'worry', 'pricier', 'pricey', 'trouble']","['fat', 'fat', 'fat']",[]
+16,"
+
+                            If your phone is sluggish after it has been snoozing, Wakelock Revamp may be for you!
+                            
+",Generally Neutral,190,"['annoying', 'sluggish', 'prohibitive', 'draining', 'idle', 'drained', 'draining', 'issue', 'severe', 'lagging', 'complained', 'poor', 'issues', 'issues', 'absence', 'mess', 'disable', 'suffers', 'lagging', 'issue']",[],[]
+17,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+18,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+19,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+20,No Headline,Extremely Negative,240,"['Vice', 'Vice', 'critical', 'critical', 'cloud']",[],"[Rolf, Werner, Rolf, Werner, Rolf, Werner, Ricky, Corker, Rolf, Rolf, Rolf, Ricky, Corker, Rolf, Rolf, Rolf, Werner]"
+21,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+22,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+23,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+24,How Secure Are RISC-V Chips?,Extremely Positive,540,"['Meltdown', 'Threat', 'attacks', 'threat', 'vulnerable', 'attacks', 'attacks', 'exploit', 'attacks', 'Meltdown', 'bugs', 'weakness', 'disagreed', 'proprietary', 'attacks', 'obscurity', 'obscurity', 'fails', 'risks', 'lacks', 'risk', 'threats', 'bad', 'vulnerable', 'threat', 'Bad', 'worry', 'proprietary', 'disservice', 'fault', 'attacks', 'skeptical', 'inevitably', 'problem', 'unsure', 'delay', 'bug']","['attack', 'lies', 'attack']","[Rupert, Baines, Codasips, Baines, Baines, Rick, OConnor, OConnor, Shahram, Mossayebi, Peter, Laackmann, Kerckhoffss, Laackmann, Anders, Nordstrom, Baines, Nicole, Fern, Baines, 'lawsuit', Baines, Baines, OConnor, Riscures, Fern, OConnor, OConnor, OConnor, Baines]"
+25,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+26,No Headline,Extremely Negative,320,"['MAR', 'critical', 'cloud']","['Abuse', 'executed']","[David, Mulholland]"
+27,"
+				Nokia opens sustainable office in Toronto			",Extremely Positive,10,['critical'],[],"[Jeffrey, Maddox]"
+28,No Headline,Extremely Negative,210,"['Inevitable', 'intense']",[],[]
+29,No Headline,Extremely Negative,400,"['Concern', 'Chaos', 'cloud', 'marginally', 'warned', 'abrupt', 'concerns', 'fallout', 'infections', 'crisis', 'lie', 'Lost', 'Ignore']",['Attack'],"[McCarthy, 'lawsuit', Eric, Xu, Xu, Xu, Alan, Fan, Xu, Ron, DeSantiss, Donald, Trumpand]"
+30,Utility And Telecom Picks For 2023,Extremely Positive,790,"['fall', 'fallen', 'Unbelievably', 'worried', 'hedge', 'aggressive', 'Unfortunately', 'volatility', 'defensive', 'risk', 'hard', 'risky', 'struggled', 'disappointing', 'lack', 'weak', 'disappointment', 'worries', 'mistake', 'issue', 'concerns', 'debt', 'issues', 'slow', 'slower', 'risk', 'debt', 'debt', 'debt', 'debt', 'losses', 'abrupt', 'debt', 'debt', 'hard', 'aggressive', 'disappointing', 'risk', 'recession', 'downside']","['conservative', 'fire', 'conservative', 'conservative', 'Conservative', 'conservative', 'conservative', 'conservative']","[Nancy, Zambell, Pekka, Lundmark, Roger, Conrad, Ed, Whitacre, John, Stankey]"

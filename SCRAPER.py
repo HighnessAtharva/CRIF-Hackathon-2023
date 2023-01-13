@@ -4,7 +4,6 @@ import re
 from newsapi import NewsApiClient
 from rich import print
 import os
-
 import csv
 import spacy
 from spacy import displacy
@@ -30,9 +29,14 @@ def parse_text_from_web(webURL: str) -> str:
         trafilatura.errors.FetchingError: If the URL is invalid or the server is down
     """
 
-    downloaded = trafilatura.fetch_url(webURL)
-    return trafilatura.extract(downloaded, include_comments=False, include_tables=False, with_metadata=False, include_formatting=True, target_language='en', include_images= False)
+    try:
+        downloaded = trafilatura.fetch_url(webURL)
+        article= trafilatura.extract(downloaded, include_comments=False, include_tables=False, with_metadata=False, include_formatting=True, target_language='en', include_images= False)
 
+        return article
+
+    except Exception as e:
+        pass
 
 def cleanup_text(text: str) -> str:
     """Clean up the text by removing special characters, numbers, whitespaces, etc for further processing and to improve the accuracy of the model.
@@ -42,20 +46,24 @@ def cleanup_text(text: str) -> str:
         str: cleaned up text
     """
 
-    text = re.sub("\xc2\xa0", "", text)  # Deal with some weird tokens
-    text = re.sub(r'\d+', '', text)  # remove numbers
-    text = re.sub(r'\s+', ' ', text)  # remove whitespaces
-    # remove special characters except full stop and apostrophe
-    text = re.sub(r'[^a-zA-Z0-9\s.]', '', text)
-    # text = text.lower()  # convert text to lowercase
-    text = text.strip()  # remove leading and trailing whitespaces
-    text = text.encode('ascii', 'ignore').decode('ascii')  # remove non-ascii characters
+    # text = re.sub(r'\d+', '', text)  # remove numbers
+    
+    # text = re.sub(r'\s+', ' ', text)  # remove whitespaces
+    try:
+        # remove special characters except full stop and apostrophe
+        text = re.sub(r'[^a-zA-Z0-9\s.]', '', text)
+        
+        # text = text.lower()  # convert text to lowercase
+        text = text.strip()  # remove leading and trailing whitespaces
+        text = text.encode('ascii', 'ignore').decode('ascii')  # remove non-ascii characters
 
-    # split text into words without messing up the punctuation
-    text = re.findall(r"[\w']+|[.,!?;]", text)
+        # split text into words without messing up the punctuation
+        text = re.findall(r"[\w']+|[.,!?;]", text)
 
-    text= ' '.join(text)
-    return text.replace(' .', '.')
+        text= ' '.join(text)
+        return text.replace(' .', '.')
+    except Exception as e:
+        pass
 
 
 
@@ -65,15 +73,20 @@ def cleanup_text(text: str) -> str:
 def scrape_news(organization: str) -> list:
     # sourcery skip: inline-immediately-returned-variable
     
-    # newsAPI
-    api_key=os.getenv('NEWSAPI')
+    try:
+        # newsAPI
+        api_key=os.getenv('NEWSAPI')
 
-    newsapi = NewsApiClient(api_key=api_key)
+        newsapi = NewsApiClient(api_key=api_key)
 
-    # get TOP articles, 1st page, grab 25 articles
-    all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=30)
+        # get TOP articles, 1st page, grab 25 articles
+        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=30)
 
-    return all_articles
+        return all_articles
+    
+    except Exception as e:
+        pass
+        
 
 
 
@@ -82,24 +95,25 @@ def scrape_news(organization: str) -> list:
 # WRITE TO CSV            #
 # =========================
 def write_to_csv(organization: str, all_articles: dict) -> None:
-    with open(f'{organization}-CHECKPOINT1.csv', 'w', encoding='utf-8', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Title", "Description", "PublishedAt", "URL", "Content"])
+    with open(f'{organization}.csv', 'w', encoding='utf-8', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Title", "Description", "PublishedAt", "URL", "Content"])
 
-            for article in all_articles['articles']:
-                title= article['title'].strip()
-                description= article['description'].strip()
-                publishedAt= article['publishedAt']
-                newsURL= article['url']
-                
-                content= parse_text_from_web(newsURL)
-                content=cleanup_text(content)
+        for idx, article in enumerate(all_articles['articles']):
+            title= article['title'].strip()
+            description= article['description'].strip()
+            publishedAt= article['publishedAt']
+            newsURL= article['url']
             
-                # download the content from the url
-                writer.writerow([article['title'], article['description'], article['publishedAt'], article['url'], content])
-                
+            content= parse_text_from_web(newsURL)
+            content=cleanup_text(content)
+        
+            # download the content from the url
+            writer.writerow([article['title'], article['description'], article['publishedAt'], article['url'], content])
             
-            print(f"[bold]Wrote {len(all_articles['articles'])} to articles.csv[/bold]")
+            print(f"[bold]Wrote {idx} -{title} to {organization}.csv[/bold]")
+            
+        print(f"[bold]Wrote {len(all_articles['articles'])} to {organization}.csv[/bold]")
     
     
 
@@ -110,8 +124,14 @@ def write_to_csv(organization: str, all_articles: dict) -> None:
 def get_headline(content):
     r = requests.get(content)
     soup = BeautifulSoup(r.content, "html.parser")
-    return soup.find('h1').get_text()
-
+    if soup.find('h1'):
+        headline=soup.find('h1').get_text()
+        if len(headline.split())<=2:
+            headline="No Headline"
+                
+    else:
+        headline="No Headline"
+    return headline
 
 def sentiment_score_to_summary(sentiment_score: int) -> str:
         """
@@ -154,7 +174,7 @@ def sentiment_analysis(content: str) -> None:
 def process_csv(organization):  # sourcery skip: identity-comprehension
 
     with open ('negative_words.txt', 'r', encoding='utf-8') as file:
-        negative_words = file.read().splitlines()
+        negative_words_list = file.read().splitlines()
 
     with open ('bad_words.txt', 'r', encoding='utf-8') as file:
         bad_words = file.read().splitlines()
@@ -170,17 +190,25 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
 
 
 
-    with open(f'{organization}-processed.csv', 'w', encoding='latin-1') as summary:
+    with open(f'{organization}-processed.csv', 'w', encoding='utf-8', newline='') as summary:
         
         # read first row from Uber.csv
-        with open(f'{organization}.csv', 'r', encoding='latin-1') as file:
+        with open(f'{organization}.csv', 'r', encoding='utf-8') as file:
             try:
                 reader = csv.reader(file)
                 next(reader)
+                
+                # write to csv
+                writer = csv.writer(summary)
+                
                 # do for every news article
+                writer.writerows([["Article", "Headline", "Headline Sentiment", "Offense Rating", "Negative Words", "Offensive Words", "Tags"]])
+                
                 for idx, row in enumerate(reader, start=1):
                     url= row[3]
                     raw_text = row[4]
+    
+                    # parse_text_from_web(webURL)
                     
                     headline=get_headline(url)
                     headline_sentiment=sentiment_analysis(headline)
@@ -189,75 +217,75 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
                     offensive_words=[]
                     tags=[]
                     
-                    if headline_sentiment in ["Extremely Negative", "Somewhat Negative"]:
-                        offense_rating=0
-                        
-
-                        if headline_sentiment=="Somewhat Negative":
-                            offense_rating+=100
-                        
-                        # tag as hate speech
-                        elif headline_sentiment=="Extremely Negative":
-                            offense_rating+=200
-                        
-                        nlp_text= nlp(raw_text)
-
-                        
-                        # add custom entities
-                        for word in nlp_text:
-                            # if it is a negative word
-                            if word.text in negative_words:
-                                offense_rating+=10
-                                negative_words.append(word.text)
-                                
-                                
-                            # if it is a highly offensive word 
-                            elif word.text in bad_words:
-                                offense_rating+=50
-                                offensive_words.append(word.text)
-                                tags.append("hate speech")
-        
-                            # if the article is talks about lawsuits
-                            if word.text in lawsuits:
-                                offense_rating+=30
-                                tags.append("lawsuit")
-                            
-                            # if the article is about harassment
-                            if word.text in harassment:
-                                offense_rating+=50
-                                tags.append("harassment")
-                            
-                            # does article mention a country?
-                            if word.text in countries:
-                                tags.append("country")    
-                        
-                            # does article mention a person
-                            if word.ent_type_ == "PERSON":
-                                tags.append(word)     
-                                                    
-                        
-                        if offense_rating>20:
-                            offense_rating-=10
-
-
-                        # write to csv
-                        writer = csv.writer(summary)
-                        # Write Column Headers
-                        writer.writerows([["Article", "Headline", "Headline Sentiment", "Offense Rating", "Negative Words", "Offensive Words"]])
-                        
-                        # Write each row
-                        writer.writerow([idx, headline, headline_sentiment, offense_rating, [word for word in negative_words], [word for word in offensive_words]])
-                        print(f"Article {idx} written to csv")
                     
-                    else:
-                        print(f"Article {idx} is not offensive. SKIPPING...")
+                    offense_rating=0
+                    
+
+                    if headline_sentiment=="Somewhat Negative":
+                        offense_rating+=100
+                    
+                    # tag as hate speech
+                    elif headline_sentiment=="Extremely Negative":
+                        offense_rating+=200
+                    
+                    nlp_text= nlp(raw_text)
+
+                    
+                    # add custom entities
+                    for word in nlp_text:
+                        # if it is a negative word
+                        if word.text.lower() in negative_words_list:
+                            offense_rating+=10
+                            negative_words.append(word.text)
+                            
+                            
+                        # if it is a highly offensive word 
+                        elif word.text.lower() in bad_words:
+                            offense_rating+=50
+                            offensive_words.append(word.text)
+                            
+    
+                        # if the article is talks about lawsuits
+                        if word.text.lower() in lawsuits:
+                            offense_rating+=30
+                            tags.append("lawsuit")
+                        
+                        # if the article is about harassment
+                        if word.text.lower() in harassment:
+                            offense_rating+=50
+                            tags.append("harassment")
+                        
+                        # does article mention a country?
+                        if word.text.lower() in countries:
+                            tags.append("country")    
+                    
+                        # does article mention a person
+                        if word.ent_type_ == "PERSON":
+                            tags.append(word)     
+                                                
+                    
+                    if offense_rating>20:
+                        offense_rating-=10
+                        
+                    
+                    # Write each row
+                    writer.writerow([idx, headline, headline_sentiment, offense_rating, [word for word in negative_words], [word for word in offensive_words], [tag for tag in tags]])
+                    print(f"Article {idx} written to csv")
+                    
+                else:
+                    print(f"Article {idx} is not offensive. SKIPPING...")
+                    
                     
             except Exception as e:
-                pass    
+                print(e)
+                print(e.__class__)
+                print(e.__doc__)
+                print(e.__traceback__)
+                
 
 def visualize(organization):
     raw_text = ''
-    with open('{organization}.csv', 'r', encoding='latin-1') as file:
+    with open('{organization}.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)
         
@@ -272,9 +300,21 @@ def visualize(organization):
 # sourcery skip: identity-comprehension
 nlp = spacy.load("en_core_web_trf")
 
+import os
+
 # # sourcery skip: inline-immediately-returned-variable
-# print("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]")
-# organization=input()
-# articles=scrape_news(organization)
-# write_to_csv(organization, all_articles)
-process_csv("NETFLIX")
+print("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]")
+organization=input()
+
+if os.path.exists(path=f'{organization}.csv'):
+    print(f"Found {organization}.csv")
+    
+else:
+    articles=scrape_news(organization)
+    write_to_csv(organization, articles)
+
+if os.path.exists(path=f'{organization}-processed.csv'):
+    print(f"Found {organization}-processed.csv")
+else:
+    process_csv(organization)
+

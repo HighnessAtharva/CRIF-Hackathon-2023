@@ -5,10 +5,13 @@ abase
 absymal
 abnormal
 abolish
+looser
+loser
 abominable
 abominably
 abominate
 abomination
+dead
 abort
 aborted
 aborts
@@ -69,6 +72,7 @@ adulterier
 adversarial
 adversary
 adverse
+minority
 adversity
 afflict
 affliction
@@ -163,8 +167,6 @@ anxiousness
 apathetic
 apathetically
 apathy
-apocalypse
-apocalyptic
 apologist
 apologists
 appal
@@ -449,8 +451,10 @@ buggy
 bugs
 bulkier
 bulkiness
+lies
 bulky
 bulkyness
+laid
 bull****
 bull----
 bullies

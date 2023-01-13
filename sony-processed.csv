@@ -1,0 +1,35 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,Watch Sony's CES 2023 keynote in under 9 minutes,Extremely Positive,10,['limited'],[],"[Neill, Blomkampdirected]"
+2,Every Game Coming to PlayStation Plus and Xbox Game Pass in January 2023 (So Far),Extremely Negative,380,"['Fallen', 'fugitive', 'massacre', 'evil', 'Dark', 'Fallout', 'Fallout', 'Fallout', 'Fallout', 'Fallen', 'Cry', 'Fall', 'Fall', 'creepy', 'Fall', 'Monster', 'Monster', 'Fury', 'Havoc']",[],"[Kal, Kestis, Bound, by, Inkulinati]"
+3,Sony Honda Mobility weighs future IPO for electric vehicle joint venture,Extremely Positive,190,[],"['joint', 'joint', 'joint', 'joint']","[Yasuhide, Mizuno, Mizuno, Toshihiro, Mibe]"
+4,2022 was an incredible year for handheld gaming,Extremely Positive,280,"['embarrassing', 'cloud', 'critics', 'disorganized', 'cloud', 'Cloud', 'buzzing', 'Panic', 'Imperfect', 'lose', 'cloud', 'expensive', 'cloud', 'Cloud', 'cloud', 'Cloud', 'cloud', 'cloud', 'Breach']","['explosion', 'failed']",[]
+5,Neill Blomkamp's Gran Turismo film certainly looks and sounds like Gran Turismo,Somewhat Positive,80,"['ripped', 'Stranger', 'delayed', 'Twisted']",['hell'],"[Neill, Blomkamp, Blomkamp, Archie, Madekwe, Simon, David, Harbour, Orlando, Bloom, Geri, Halliwell, Ginger, Spice, Blomkamp]"
+6,Disney+ is adding DTS audio to IMAX Enhanced Marvel films,Extremely Positive,0,[],[],[]
+7,Google Pixel 7a hands-on leak reportedly shows the 90Hz display,Extremely Negative,250,"['leaks', 'rumors', 'leaks', 'leak', 'rumors', 'rumors']",[],[]
+8,DJI's lightweight RS 3 Mini camera stabilizer is designed to be used with one hand,Extremely Positive,130,"['problems', 'limitations', 'tiring', 'concerned']","['shooting', 'shooting']",[]
+9,Sony announces new controller aimed at gamers with disabilities,Extremely Positive,30,"['lie', 'excessive', 'pain', 'unacceptable']",[],"[Steve, Spohn, Krissie, A.]"
+10,PlayStation 5 Controllers Are at Their Lowest-Ever Price Right Now,Extremely Negative,220,"['rocky', 'tension', 'tension']",[],[]
+11,"Sony, Honda roll out prototype of ‘Afeela’ electric vehicle that uses Qualcomm tech",Extremely Positive,20,"['slow', 'struggled']",[],"[Yashuhide, Mizuno]"
+12,No Headline,Extremely Negative,320,"['ridiculously', 'limited', 'delayed', 'intense', 'weird', 'insane', 'cloud', 'dump', 'split', 'Unfortunately', 'sad', 'worry', 'missed']",[],"[Neill, Blomkamp]"
+13,"At CES 2023, Sony's 'Gran Turismo' flags new entertainment strategy",Extremely Positive,310,"['break', 'curse', 'bad', 'rival', 'struck', 'weakness', 'rumors', 'struggled', 'touted', 'worst', 'lost', 'Bad', 'Bad', 'Stranger']","['Japanese', 'Stringer', 'Stringer']","[Kenichiro, Yoshida, Yoshida, Ulrike, Schaede, Schaede, Tony, Vinciquerra, Vinciquerra, Jim, Ryan, SpiderMans, Tom, Holland, Mark, Wahlberg, Benito, Antonio, Martnez, Ocasio, Bad, Bunny, Bad, Bunny, 'lawsuit', Rob, Stringer, Stringer, Jann, Mardenborough, Neil, Blomkamp, Orlando, Bloom, David, Harbour, Asad, Qizilbash]"
+14,Raspberry Pi's new 12-megapixel camera modules provide powered autofocus,Extremely Positive,20,"['bumps', 'expensive', 'complex']",[],[]
+15,Universal Audio launches two new premium microphones,Extremely Positive,50,"['expensive', 'pricey', 'isolation', 'noise', 'shock', 'expensive']",[],[]
+16,"If You Think a Flying Car Is Cool, Wait Until You See These Futuristic Rideables",Somewhat Positive,220,"['weird', 'missed', 'bad', 'bulky', 'impersonal', 'risk', 'confusing', 'emergency']","['sexy', 'sexy', 'Japanese']","[K., I., T., T., Oliver, Zipse, Daniel, Van, Boom, Guy, Kaplinsky, Daniel, Van, Boom, Bridget, Carey, Daniel, Van, Boom, Daniel, Van, Boom]"
+17,"
+At CES 2023, Sony's 'Gran Turismo' flags new entertainment strategy
+",Extremely Positive,310,"['break', 'curse', 'bad', 'rival', 'struck', 'weakness', 'rumors', 'struggled', 'touted', 'worst', 'lost', 'Bad', 'Bad', 'Stranger']","['Japanese', 'Stringer', 'Stringer']","[Kenichiro, Yoshida, Yoshida, Ulrike, Schaede, Schaede, Tony, Vinciquerra, Vinciquerra, Jim, Ryan, Tom, Holland, Mark, Wahlberg, Benito, Antonio, Martnez, Ocasio, Bad, Bunny, Bad, Bunny, 'lawsuit', Rob, Stringer, Stringer, Jann, Mardenborough, Neil, Blomkamp, Orlando, Bloom, David, Harbour, Asad, Qizilbash]"
+18,"
+			Sony and Honda Collab on New Electric Vehicle
+		",Extremely Positive,70,"['Layoff', 'Skeptic', 'Divisive']",[],"[Yasuhide, Mizuno, Mizuno, Mizuno, 'harassment', Elon, Musk]"
+19,Sony and Honda Drive New Electric Car Afeela Onto the CES Stage,Extremely Positive,90,[],"['Hummer', 'joint']","[Yasuhide, Mizuno]"
+20,The Morning After: The best of CES 2023,Extremely Positive,430,"['limited', 'missed', 'sue', 'crisis', 'drones', 'Ridiculous', 'drones', 'Unfortunately', 'crept', 'rival', 'expensive']","['laid', 'Japanese', 'Japanese', 'pee', 'Urine', 'pee']","[Mat, Smith, 'lawsuit', Mark, Gurman, Gurman]"
+21,Here’s the electric car that Sony is going to build with Honda,Extremely Positive,90,[],"['Japanese', 'joint']","[Kim, Libreri, Cristiano, Amon]"
+22,Sony Claims The PlayStation 5 Shortage Is Over In 2023,Extremely Negative,280,"['struggling', 'shortage', 'marginally', 'issues', 'difficult', 'shortage', 'inflated', 'shortage', 'issues']",[],"[Jim, Ryan]"
+23,"New Sony Car Plays PS5 Games, But Also Turns Your Ride Into A Billboard",Somewhat Positive,240,"['sucks', 'cloud', 'weird', 'laggy', 'cloud']","['shit', 'joint', 'Pimp', 'backseat']","[Elon, Musks, Yasuhide, Mizuno]"
+24,"Sony unveils Project Leonardo, a new controller for accessible gaming",Extremely Positive,100,"['limited', 'vice', 'Naughty', 'limited', 'difficulty', 'split']",['lies'],"[Jim, Ryan, Ryan, Ryan, Hideaki, Nishino, Nishino, Nishino]"
+25,Sony Playstation VR will launch with at least 30 titles,Extremely Positive,0,[],[],"[Jim, Ryan, Ryan]"
+26," At CES 2023, Sony's 'Gran Turismo' flags new entertainment strategy ",Extremely Positive,0,[],[],[]
+27,No Headline,Extremely Negative,370,"['pricey', 'abusive', 'scream', 'loud', 'noises', 'fumble', 'shortcomings', 'limit', 'hefty', 'noise', 'issues', 'painful', 'inhibition', 'unnoticed', 'annoying', 'slap', 'gripes', 'noise']",[],[MisterHW]
+28,"Sony says its PlayStation 5 shortage is finally over, but it's still hard to buy",Somewhat Negative,170,"['shortage', 'hard', 'shortage', 'difficult', 'shortage', 'limited', 'issues', 'limited']",[],"[Jim, Ryan, Ryan, Ryan]"
+29,The Chonky Razer Kiyo Pro Ultra Features the Largest Sensor Ever Put Into a Webcam,Extremely Positive,70,"['dark', 'blurred', 'twist']",['Crack'],[]
+30,Poly’s Voyager Free 60+ might be the slickest earbuds for work yet,Somewhat Positive,40,"['hard', 'broken', 'noise', 'expensive', 'hard']",[],[]
