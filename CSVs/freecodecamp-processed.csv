@@ -1,0 +1,4 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,No Headline,Extremely Negative,300,"['wrong', 'wrong', 'annoying', 'worse', 'controversial', 'misleading', 'problematic', 'hard']",[],['lawsuit']
+2,Learn Data Science From These GitHub Repositories,Extremely Positive,140,"['hard', 'problems', 'break', 'difficulty', 'difficult', 'problem', 'weaknesses', 'cracks', 'Cheat', 'Cheat', 'Cheat', 'cheat', 'cheat', 'tricky', 'hard']",[],"[Nisha, Arya]"
+3,Natural Language Processing with spaCy,Somewhat Positive,20,"['cheat', 'cheat']",[],"[spacy, Sara, Metwalli]"

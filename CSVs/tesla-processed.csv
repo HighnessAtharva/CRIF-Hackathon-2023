@@ -1,0 +1,6 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,Elon Musk isn’t serious about giving power to a new CEO,Somewhat Negative,280,"['foolish', 'broke', 'disappointment', 'rollercoaster', 'concerns', 'problem', 'problems', 'Unfortunately', 'suspiciously']",['hell'],"[Elon, Musk, 'harassment', Musk, Musk, Musk, Musk, Musk, Musks, Hunter, Biden, Ross, Gerber, Musk, Musk, Musk, Elon]"
+2,"
+      Tesla delivered a record 1.3 million vehicles in 2022, but it still disappointed Wall Street
+    ",Somewhat Negative,150,"['disappoint', 'recession', 'fears', 'missed', 'sinking', 'rattled']",[],[]
+3,Tesla Delivered a Record 1.31 Million Cars in 2022 Despite Elon,Extremely Negative,450,"['mess', 'expensive', 'disappointing', 'problem', 'downhill', 'fell', 'fallout', 'refusing', 'wreck', 'critical', 'criticized']","['toilet', 'firing', 'angry']","[Elon, Musk, Musk, Musk, Musks, Musk, Musk, Musk, Leo, KoGuan, Elon, KoGuan]"

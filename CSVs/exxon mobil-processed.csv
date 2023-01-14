@@ -1,0 +1,11 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,Russian oil exports crater by 54% in the first full week of the EU's embargo amid a shortage of tankers willing to carry cargoes,Extremely Negative,480,"['crude', 'crude', 'tumbled', 'fell', 'shortage', 'rival', 'risks', 'dark', 'crude', 'stifle', 'crude', 'shock']",[],"['lawsuit', 'lawsuit', 'harassment', 'lawsuit', 'lawsuit']"
+2,Tesla stock dive sends market cap of the green energy darling below oil giant Exxon Mobil's,Extremely Positive,100,"['worst', 'slump', 'undone', 'crisis', 'worst', 'lost', 'aggressive', 'concerns', 'warned', 'loss', 'crashing']",[],"[Elon, Musks, Musk]"
+3,Exxon signals strong Q4 profit to drive annual record,Extremely Positive,40,"['retreated', 'crude', 'fell', 'dumps', 'unwanted']",[],[]
+4,Russia's Sakhalin-1 near full oil output after Exxon exit -source,Extremely Negative,220,"['struggling', 'unlikely', 'crude']",[],[]
+5,Strike action to resume at Exxon Mobil’s UK Fawley oil refinery in January,Extremely Negative,390,"['Strike', 'Strike', 'strike', 'strike', 'strike']",[],"['harassment', 'harassment', 'harassment']"
+6,Hess signals Guyana's 7th oil platform to lift output above 1.2 mln boepd,Extremely Positive,50,['aggressive'],['conservative'],"[John, Hess]"
+7,"Savannah Energy raises 2022 revenue outlook, says Chad production uninterrupted",Extremely Negative,240,[],['Niger'],[]
+8,Porsche’s synthetic gasoline factory comes online today in Chile,Extremely Positive,20,"['doubt', 'difficult', 'doubt']",[],"[Diego, Pardow, Barbara, Frenkel, Porsches, Michael, Steiner, Porsches, Steiner, Steiner, Steiner, cheapSteiner]"
+9,State Dept asked U.S. energy firms about Mexico protectionism prior to summit,Extremely Negative,280,"['dispute', 'dispute', 'denied', 'struggled', 'breach', 'dispute']",[],"[Biden, Joe, Biden, Andres, Manuel, Lopez, Obrador, Biden, Lopez, Obrador, Ken, Salazar, 'lawsuit']"
+10,"U.S. oil refiners restoring lost output, some outages to run into January",Extremely Negative,320,"['lost', 'freeze', 'freezing', 'losses', 'suffered', 'damage', 'fell', 'freezing', 'overwhelming', 'freeze', 'freeze', 'critical', 'suffered']",[],[]

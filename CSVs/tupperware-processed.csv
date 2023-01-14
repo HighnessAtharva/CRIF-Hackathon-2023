@@ -1,0 +1,4 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,Please verify you are a human,Extremely Negative,190,[],[],[]
+2,No Headline,Extremely Negative,230,"['dumping', 'hack', 'FUNNY', 'FUNNY']",[],"[Hannah, hjeannn]"
+3,Please verify you are a human,Extremely Negative,190,[],[],[]

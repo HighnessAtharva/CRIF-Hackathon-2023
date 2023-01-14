@@ -1,0 +1,11 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,OnePlus 11 will debut in China on January 4th,Extremely Negative,190,[],[],[]
+2,My Top 5 phones of 2022 - Yordan Comments,Extremely Positive,320,"['expensive', 'disagree', 'sad', 'hate', 'disagree', 'sad', 'anxious', 'hate', 'issue', 'irregular', 'hurts', 'Hard', 'childish', 'childish', 'hurts', 'Hard', 'heck', 'heck']","['angry', 'swallow', 'swallow']","[Atlanticboy, Anonymous, Kriegsherr, Kriegsherr, Muthu, Tyfyh]"
+3,Oppo smartphones could launch with an in-house chipset in 2024,Somewhat Positive,80,"['Rumors', 'rumor', 'rumors', 'stranger', 'falling', 'problem']",[],"['lawsuit', Jay, Bonggolto]"
+4,Vivo X90 Pro camera test: Dimensity 9200 shows off its power,Generally Neutral,10,['limited'],[],[]
+5,vivo iQOO 11 Review: An excellent flagship that will go unnoticed,Extremely Positive,590,"['CONS', 'dust', 'resistance', 'Limited', 'crowded', 'unrelenting', 'difficult', 'struggle', 'obscene', 'bumps', 'obnoxious', 'subdued', 'hard', 'deny', 'expensive', 'falling', 'Unfortunately', 'precarious', 'problem', 'soreness', 'worse', 'unexpected', 'expensive', 'stunt', 'intense', 'ruins', 'mediocre', 'superfluous', 'detrimental', 'worse', 'dust', 'resistance', 'expensive', 'unnecessary', 'Sadly', 'problem', 'concerns', 'expensive', 'deceiving', 'unattractive', 'fall', 'distracting', 'lack', 'nag', 'steal', 'Unfortunately', 'moot']","['chin', 'devil']","[Highend, iQOO, Aesthetics, 'lawsuit']"
+6,Vivo’s next foldable expected to launch in 2023 with latest chipset in tow,Extremely Positive,30,['steal'],[],"[Digital, Chat, Station, 'lawsuit', Digital, Chat, Station]"
+7,2022 Winners and losers: vivo,Extremely Positive,110,"['questionable', 'dark', 'shortcomings', 'omit', 'issue', 'issue', 'bulkier']",['Arab'],[]
+8,vivo X90 series global rollout is about to start,Somewhat Positive,20,"['doubt', 'problems', 'complains']",[],[]
+9,"vivo S16 trio announced, S16 Pro brings Dimensity 8200 and 50MP seflie cam",Extremely Positive,0,[],[],[]
+10,No Headline,Extremely Negative,310,"['poorly', 'limitations']","['blind', 'shooting']","[Marques, Brownlee]"

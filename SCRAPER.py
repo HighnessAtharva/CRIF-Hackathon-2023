@@ -30,6 +30,10 @@ from rich.align import Align
 from rich.panel import Panel
 from rich.text import Text
 import matplotlib.pyplot as plt
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+import pandas as pd
 
 
 
@@ -99,7 +103,7 @@ def scrape_news(organization: str) -> list:
         newsapi = NewsApiClient(api_key=api_key)
 
         # get TOP articles, 1st page, grab 3 articles
-        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=3)
+        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=10)
 
         return all_articles
     
@@ -114,26 +118,25 @@ def scrape_news(organization: str) -> list:
 # WRITE TO CSV            #
 # ========================#
 def write_to_csv(organization: str, all_articles: dict) -> None:
-    with open(f'CSVs/{organization}.csv', 'w', encoding='utf-8', newline='') as file:
+    with open(f'CSVs/COMMON.csv', 'w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["Article", "Title", "Description",  "URL", "Content", "Published"])
-
-        for idx, article in enumerate(all_articles['articles']):
+        for idx, article in enumerate(all_articles['articles'], start=1):
             title= article['title'].strip()
             description= article['description'].strip()
             publishedAt= article['publishedAt']
             newsURL= article['url']
             
             content= parse_text_from_web(newsURL)
-            content=cleanup_text(content)
+            content= cleanup_text(content)
         
             # download the content from the url
             writer.writerow([idx, article['title'], article['description'], article['url'], content, publishedAt])
             
-            print(f"[bold]Wrote {idx} -{title} to {organization}.csv[/bold]")
+            print(f"✅ [bold green]SUCCESS! Wrote {idx} - [bold blue]{title}[/bold blue] to [gold1]{organization}[/gold1].csv")
             
         # Adding the parsed content to the CSV    
-        print(f"[bold]Wrote {len(all_articles['articles'])} to {organization}.csv[/bold]")
+        print(f"[bold green]DONE! WROTE {len(all_articles['articles'])} ARTICLES TO [r]{organization}.csv[/r][/bold green]")
     
     
 
@@ -142,7 +145,7 @@ def write_to_csv(organization: str, all_articles: dict) -> None:
 # ========================#
 
 #egt the headlines
-def get_headline(content):
+def get_headline(content, organization):
     r = requests.get(content)
     #parse the text
     soup = BeautifulSoup(r.content, "html.parser")
@@ -150,9 +153,15 @@ def get_headline(content):
         headline=soup.find('h1').get_text()
         if len(headline.split())<=2:
             headline="No Headline"
-                
+    
     else:
         headline="No Headline"
+        
+    pass
+                
+    
+        
+    
     return headline
 
 def sentiment_score_to_summary(sentiment_score: int) -> str:
@@ -216,10 +225,10 @@ def process_csv(organization):
 # Creating Final csv      #
 # ========================#
     #definig charset
-    with open(f'CSVs/{organization}-processed.csv', 'w', encoding='utf-8', newline='') as summary:
+    with open(f'CSVs/COMMON-PROCESSED.csv', 'w', encoding='utf-8', newline='') as summary:
         
         # read first row from Uber.csv
-        with open(f'CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
+        with open(f'CSVs/COMMON.csv', 'r', encoding='utf-8') as file:
             try:
                 reader = csv.reader(file)
                 next(reader)
@@ -230,13 +239,14 @@ def process_csv(organization):
                 # do for every news article
                 writer.writerows([["Article", "Headline", "Headline Sentiment", "Offense Rating", "Negative Words", "Offensive Words", "Tags"]])
                 
+                print("[bold gold1]===============================[/bold gold1]\n\n")
                 for idx, row in enumerate(reader, start=1):
                     url= row[3]
                     raw_text = row[4]
     
                     # parse_text_from_web(webURL)
                     
-                    headline=get_headline(url)
+                    headline=get_headline(url, organization)
                     headline_sentiment=sentiment_analysis(headline)
                     
                     negative_words=[]
@@ -299,7 +309,7 @@ def process_csv(organization):
                     print(f"Article {idx} written to csv")
                     
                 else:
-                    print(f"Article {idx} is not offensive. SKIPPING...")
+                    print(f"✔ [bold u r]\nSUCCESS! Finished processing COMMON-PROCESSED.csv[/bold u r]")
                     
                     
             except Exception as e:
@@ -315,7 +325,7 @@ def process_csv(organization):
 #visualize the text in html
 def visualize(organization):
     raw_text = ''
-    with open(f'CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
+    with open(f'CSVs/COMMON.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)
         
@@ -325,10 +335,7 @@ def visualize(organization):
         
         nlp_text = nlp(raw_text)
         
-        # print(Panel(nlp_text).show_tags)
-        for word in nlp_text:
-            print(word.text, word.pos_, word.dep_, word.label_)
-        
+        print("🚀 [bold magenta r]Visualizing text...[/bold magenta r]")
         # serve the displacy visualizer
         displacy.serve(nlp_text, style="ent")
 
@@ -337,12 +344,12 @@ def visualize(organization):
 # ========================#
 
 def merge_csv(csv1, csv2, organization):
-    import pandas as pd
-    df1 = pd.read_csv(csv1)
-    df2 = pd.read_csv(csv2) 
+    
+    df1 = pd.read_csv(csv1, encoding='unicode_escape')
+    df2 = pd.read_csv(csv2, encoding='unicode_escape') 
     df = pd.merge(df1, df2, on='Article')
-    df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
-    print(f"CSVs merged to {organization}-ANALYSIS.csv")
+    df.to_csv(f'CSVs/COMMON-ANALYSIS.csv', index=False)
+    print(f"CSVs merged to COMMON-ANALYSIS.csv")
     
 
       
@@ -351,8 +358,8 @@ def merge_csv(csv1, csv2, organization):
 # ========================#   
 # RUN SAME FUNCTION TWICE 
 def final_cleanup(organization):
-    import pandas as pd
-    df = pd.read_csv(f'CSVs/{organization}-ANALYSIS.csv')
+    
+    df = pd.read_csv(f'CSVs/COMMON-ANALYSIS.csv', encoding='unicode_escape')
     
 
     # write - to empty cells in offensive words
@@ -373,12 +380,12 @@ def final_cleanup(organization):
     # clean up negative words
     df['Negative Words'] = df['Negative Words'].str.replace('[', '').str.replace(']', '').str.replace("'", '')
     
-    df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
+    df.to_csv(f'CSVs/COMMON-ANALYSIS.csv', index=False)
 #get orgainizations url   
 def get_sub_url(organization):
     
-    with open (f'CSVs/{organization}-ANALYSIS.csv', 'r', encoding='utf-8') as f:
-        with open (f'CSVs/{organization}-ANALYSIS.csv', 'w', encoding='utf-8') as f2:
+    with open (f'CSVs/COMMON-ANALYSIS.csv', 'r', encoding='utf-8') as f:
+        with open (f'CSVs/COMMON-ANALYSIS.csv', 'w', encoding='utf-8') as f2:
             publisher=[]
             reader = csv.reader(f)
             url = [row[4] for row in reader]
@@ -392,7 +399,7 @@ def get_sub_url(organization):
             # replace items from publisher where character length is more than 40 with '-'
             publisher = [re.sub(r'.{40,}', '-', i) for i in publisher]         
             print(publisher)
-    print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")   
+    print(f"CSVs cleaned up to COMMON-ANALYSIS.csv")   
 # sourcery skip: identity-comprehension
 nlp = spacy.load("en_core_web_trf")
 
@@ -452,68 +459,6 @@ def print_banner(console) -> None:
     )
     console.print(panel)
 
-# print details
-def print_about_app()->None:
-    """Prints the details of the app"""
-
-    layout = Layout()  
-    
-    header_content =  Panel(
-    renderable="📚 [gold1 bold]Media Analysis[/gold1 bold] is a [i u]Command Line Interface[/i u] that allows users to know the reputational  threats for an given company. The application uses top seo pages and a fixed amount of articles provided by an opensource NewsApi and uses a nlp model to analyze the articles and the sentiments expressed through them. These sentiments are being assesd by fixed model of words where the articles is checked for some presence specific list of words and then specific sentiment score is added. For example if words like lawsuite or loss are encountered then the negative sentiment score is added. Finall score concludes the article as Extremely positive or negative and other related sentiments  ",
-    title="[reverse]ABOUT Media Analysis CLI[/reverse]",
-    title_align="center",
-    border_style="bold green",
-    padding=(1,1),
-    box= box.DOUBLE_EDGE,
-    highlight=True
-    )
-
-    main_content = Panel(
-        renderable="[bold u]WE HAVE[/bold u]:\n\n[bold u green]1[/bold u green]. Sentiment expression of the articles scraped  \n\n [bold u green]2[/bold u green]. Detailed info of threats to reputaion\n\n [bold u green]3[/bold u green]. Detailed csv file genrated\n\n [bold u green]4[/bold u green]Detailed dashboard ready to import the csv",
-        title="[reverse]FEATURES[/reverse]",
-        title_align="center",
-        border_style="bold blue",
-        padding=(1,1),
-        box= box.DOUBLE_EDGE,
-        )
-
-
-    # Divide the "screen" in to three parts
-    layout.split(
-        Layout(name="header", size=12),
-        Layout(name="main", size=12),
-    )
-
-    #HEADER
-    layout["header"].update(
-    header_content
-    )
-
-
-    # MAIN CONTENT
-    layout["main"].split_row(
-        Layout(name="side",),
-        Layout(
-            main_content,
-            name="body", ratio=2),
-    )
-
-
-    # SIDE CONTENT
-    layout["side"].split(
-            # SIDE CONTENT TOP
-            Layout(
-               Panel(renderable="\t\t  💲💲💲 \n\n       [b u]Features and Suggestions are WELCOME[/b u] \n\n    [b u]PLEASE VISIT OUR GITHUB PAGE[/b u] \n\n \t\t  💰💰💰", border_style="green")
-            ),
-
-            # SIDE CONTENT BOTTOM
-            Layout(
-                Panel("🐍 [b u]Developed with[/b u]: Python \n\n😎 [b u]Copyright[/b u]: 2022 (Atharva Shah, Ali, gurjas, aditya)\n\n✅ [b u]Language Support[/b u]: English", border_style="red")
-            )
-    )
-
-    print(layout)
-    
 
     
 # ========================#
@@ -523,33 +468,34 @@ def print_about_app()->None:
 #start cli
 console = Console(record=False, color_system="truecolor")
 print_banner(console)
-print_about_app()
+
 # sourcery skip: inline-immediately-returned-variable
 
 # ========================#
-print(Panel.fit("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]"))
+print(Panel.fit("[bold green reverse]ENTER AN ORGANIZATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]"))
 organization=input()
 
 # ========================#
-if os.path.exists(path=f'CSVs/{organization}.csv'):
-    print(f"Found {organization}.csv")
+# if os.path.exists(path=f'CSVs/COMMON.csv'):
+#     print(f"Found COMMON.csv")
     
-else:
-    articles=scrape_news(organization)
-    write_to_csv(organization, articles)
+# else:
+articles=scrape_news(organization)
+write_to_csv(organization, articles)
 
 # ========================#
-if os.path.exists(path=f'CSVs/{organization}-processed.csv'):
-    print(f"Found {organization}-processed.csv")
-else:
-    process_csv(organization)
+# if os.path.exists(path=f'CSVs/COMMON-processed.csv'):
+#     print(f"Found COMMON-processed.csv")
+# else:
+process_csv(organization)
 
-file1=f'CSVs/{organization}.csv'
-file2=f'CSVs/{organization}-processed.csv'
+file1=f'CSVs/COMMON.csv'
+file2=f'CSVs/COMMON-processed.csv'
+
 merge_csv(file1, file2, organization)
 
-final_cleanup('zomato')
-final_cleanup('zomato')
+final_cleanup(organization)
+final_cleanup(organization)
 
 # get_sub_url('zomato')
 visualize(organization)

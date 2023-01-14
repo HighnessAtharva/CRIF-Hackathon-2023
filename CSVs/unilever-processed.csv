@@ -1,0 +1,4 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,Investor Fundsmith accuses Unilever of 'virtue signalling' and prioritising Peltz,Extremely Negative,250,"['accuses', 'objection', 'lost', 'plot', 'struck', 'lack']",[],"[Fundsmith, Peltz, Terry, Smith, Smith, Nelson, Peltz, Peltz, Smith, Peltz, Smith, Peltzs, Smith, Smith]"
+2,No Headline,Extremely Negative,210,"['poorly', 'poorly']",[],"[Modi, Narendra, Modis, Narendra, Modis]"
+3,India's Lotus Chocolate rises 5% on selling majority stake to Reliance Retail,Extremely Negative,200,['Limited'],[],"[Mukesh, Ambani]"
