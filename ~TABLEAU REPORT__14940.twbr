@@ -1282,6 +1282,9 @@
       <column datatype='integer' name='[Article (crunchyroll-ANALYSIS.csv)]' role='measure' type='quantitative' />
       <column datatype='integer' name='[Article (microsoft-ANALYSIS.csv)]' role='measure' type='quantitative' />
       <column datatype='integer' name='[Article]' role='measure' type='quantitative' />
+      <column caption='url_sub' datatype='string' name='[Calculation_1051309090102484992]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='[URL (OpenAI-ANALYSIS.csv)]' />
+      </column>
       <column datatype='string' name='[Negative Words]' role='dimension' type='nominal' />
       <column datatype='integer' name='[Offense Rating (OpenAI-ANALYSIS.csv)]' role='measure' type='quantitative' />
       <column datatype='datetime' name='[Published]' role='dimension' type='ordinal' />

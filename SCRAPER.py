@@ -380,7 +380,21 @@ def get_sub_url(organization):
     # save the cleaned up publisher list to a csv
     with open (f'CSVs/{organization}-ANALYSIS.csv', 'w', encoding='utf-8') as f:
         writer = csv.writer(f)
-        writer.writerow(publisher)
+        # add a new column called publisher to the csv
+        writer.writerow(['Article', 'Headline', 'Sentiment', 'Offense Rating', 'Negative Words', 'Offensive Words', 'Tags', 'Publisher'])
+        
+        # article= [row[0] for row in reader]
+        # headline= [row[1] for row in reader]
+        # sentiment= [row[2] for row in reader] 
+        # offense_rating= [row[3] for row in reader]
+        # negative_words= [row[4] for row in reader]
+        # offensive_words= [row[5] for row in reader]
+        # tags= [row[6] for row in reader]
+        # publisher_new= [i for i in publisher]
+        # add the publisher list to the csv
+        for i in publisher:
+            writer.writerow([i])
+             
     
     print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")
     
@@ -532,9 +546,12 @@ def print_about_app()->None:
 # file2=f'CSVs/{organization}-processed.csv'
 # merge_csv(file1, file2, organization)
 
-# for x in ['marvel', 'bbc', 'cnbc', 'nvidia', 'meta']:
-# final_cleanup('marvel')
-get_sub_url('marvel')
+# for x in ['marvel', 'bbc', 'cnbc', 'nvidia']:
+final_cleanup('cnbc')
+final_cleanup('cnbc')
+final_cleanup('nvidia')
+final_cleanup('nvidia')
+# get_sub_url('marvel')
 # visualize(organization)
 
 
