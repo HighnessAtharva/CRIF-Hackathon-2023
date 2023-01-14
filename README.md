@@ -23,6 +23,3 @@ Can use dependency parsing or predicate classifiers to establish relationships b
 4. **Dashboard** -
 Display these relationships in an appropriate Dashboard => PowerBI / Tableau
 
-
-*todo*
-create questions regarding the keywords and data facts 

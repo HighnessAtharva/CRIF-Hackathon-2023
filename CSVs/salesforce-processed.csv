@@ -1,0 +1,4 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,"Amazon's expanded job cuts will affect over 18,000 employees",Extremely Negative,450,"['lost', 'losing', 'froze', 'broke', 'Slack', 'bloated']",[],"[Andy, Jassy, 'harassment', 'harassment', 'harassment', Mark, Zuckerberg, 'harassment']"
+2,Salesforce plans to cut staff by 10% in latest tech layoffs,Generally Neutral,170,"['downturn', 'stubbornly', 'delaying', 'hurting', 'challenging', 'downturn', 'slowed', 'downturn']",[],"['harassment', Kanye, West, Bianca, Censori, Marc, Benioff, Benioff, Joshua, White, 'harassment']"
+3,"Qualcomm, Salesforce to build new connected vehicle platform for automakers",Extremely Positive,0,[],[],[]

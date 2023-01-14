@@ -29,6 +29,7 @@ from platform import system, platform
 from rich.align import Align
 from rich.panel import Panel
 from rich.text import Text
+import matplotlib.pyplot as plt
 
 
 
@@ -79,7 +80,7 @@ def cleanup_text(text: str) -> str:
 
         # split text into words without messing up the punctuation
         text = re.findall(r"[\w']+|[.,!?;]", text)
-
+    
         text= ' '.join(text)
         return text.replace(' .', '.')
 
@@ -89,7 +90,7 @@ def cleanup_text(text: str) -> str:
 # SCRAPING                #
 # ========================#
 def scrape_news(organization: str) -> list:
-    # sourcery skip: inline-immediately-returned-variable
+    # sourcery skip: inline-immediately-returned-variable, use-contextlib-suppress
     
     try:
         # newsAPI
@@ -97,8 +98,8 @@ def scrape_news(organization: str) -> list:
 
         newsapi = NewsApiClient(api_key=api_key)
 
-        # get TOP articles, 1st page, grab 25 articles
-        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=100)
+        # get TOP articles, 1st page, grab 3 articles
+        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=3)
 
         return all_articles
     
@@ -109,9 +110,9 @@ def scrape_news(organization: str) -> list:
 
 
 
-# =========================
+# ========================#
 # WRITE TO CSV            #
-# =========================
+# ========================#
 def write_to_csv(organization: str, all_articles: dict) -> None:
     with open(f'CSVs/{organization}.csv', 'w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file)
@@ -131,6 +132,7 @@ def write_to_csv(organization: str, all_articles: dict) -> None:
             
             print(f"[bold]Wrote {idx} -{title} to {organization}.csv[/bold]")
             
+        # Adding the parsed content to the CSV    
         print(f"[bold]Wrote {len(all_articles['articles'])} to {organization}.csv[/bold]")
     
     
@@ -139,8 +141,10 @@ def write_to_csv(organization: str, all_articles: dict) -> None:
 # SENTIMENT scoring       #
 # ========================#
 
+#egt the headlines
 def get_headline(content):
     r = requests.get(content)
+    #parse the text
     soup = BeautifulSoup(r.content, "html.parser")
     if soup.find('h1'):
         headline=soup.find('h1').get_text()
@@ -170,7 +174,7 @@ def sentiment_score_to_summary(sentiment_score: int) -> str:
         elif sentiment_score == 5:
             return "Extremely Positive"
         
-        
+#calculate the sentiment score       
 def sentiment_analysis(content: str) -> None:
     """
     Performs sentiment analysis on the text and prints the sentiment score and the summary of the score
@@ -207,10 +211,11 @@ def process_csv(organization):
         harassment = file.read().splitlines()
 
 
-    #definig charset
+    
 # ========================#
 # Creating Final csv      #
 # ========================#
+    #definig charset
     with open(f'CSVs/{organization}-processed.csv', 'w', encoding='utf-8', newline='') as summary:
         
         # read first row from Uber.csv
@@ -306,6 +311,8 @@ def process_csv(organization):
 # ========================#
 # Display temp output     #
 # ========================#
+
+#visualize the text in html
 def visualize(organization):
     raw_text = ''
     with open(f'CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
@@ -317,11 +324,18 @@ def visualize(organization):
             raw_text += row[4]
         
         nlp_text = nlp(raw_text)
+        
+        # print(Panel(nlp_text).show_tags)
+        for word in nlp_text:
+            print(word.text, word.pos_, word.dep_, word.label_)
+        
+        # serve the displacy visualizer
         displacy.serve(nlp_text, style="ent")
 
 # ========================#
 # Merging Raw data        #
 # ========================#
+
 def merge_csv(csv1, csv2, organization):
     import pandas as pd
     df1 = pd.read_csv(csv1)
@@ -360,7 +374,7 @@ def final_cleanup(organization):
     df['Negative Words'] = df['Negative Words'].str.replace('[', '').str.replace(']', '').str.replace("'", '')
     
     df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
-   
+#get orgainizations url   
 def get_sub_url(organization):
     
     with open (f'CSVs/{organization}-ANALYSIS.csv', 'r', encoding='utf-8') as f:
@@ -378,15 +392,7 @@ def get_sub_url(organization):
             # replace items from publisher where character length is more than 40 with '-'
             publisher = [re.sub(r'.{40,}', '-', i) for i in publisher]         
             print(publisher)
-    
-    
-  
-        
-      
-             
-    
-    print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")
-    
+    print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")   
 # sourcery skip: identity-comprehension
 nlp = spacy.load("en_core_web_trf")
 
@@ -414,6 +420,7 @@ def get_terminal_width() -> int:
     return width
 
 
+
 def print_banner(console) -> None:
     """
     Prints the banner of the application.
@@ -432,7 +439,7 @@ def print_banner(console) -> None:
             """
     width = get_terminal_width()
     height = 10
-
+    # defining the panel
     panel = Panel(
         Align(
             Text(banner, style="green"),
@@ -445,7 +452,7 @@ def print_banner(console) -> None:
     )
     console.print(panel)
 
-
+# print details
 def print_about_app()->None:
     """Prints the details of the app"""
 
@@ -462,7 +469,7 @@ def print_about_app()->None:
     )
 
     main_content = Panel(
-        renderable="[bold u]WE HAVE[/bold u]:\n\n[bold u green] 1.[/bold u green]Sentiment expression of the articles scraped  \n\n [bold u green]2.[/bold u green]Detailed info of threats to reputaion\n\n [bold u green]3.[/bold u green]Detailed csv file genrated\n\n [bold u green]4[/bold u green]Detailed dashboard ready to import the csv",
+        renderable="[bold u]WE HAVE[/bold u]:\n\n[bold u green]1[/bold u green]. Sentiment expression of the articles scraped  \n\n [bold u green]2[/bold u green]. Detailed info of threats to reputaion\n\n [bold u green]3[/bold u green]. Detailed csv file genrated\n\n [bold u green]4[/bold u green]Detailed dashboard ready to import the csv",
         title="[reverse]FEATURES[/reverse]",
         title_align="center",
         border_style="bold blue",
@@ -474,7 +481,7 @@ def print_about_app()->None:
     # Divide the "screen" in to three parts
     layout.split(
         Layout(name="header", size=12),
-        Layout(name="main", size=16),
+        Layout(name="main", size=12),
     )
 
     #HEADER
@@ -501,44 +508,50 @@ def print_about_app()->None:
 
             # SIDE CONTENT BOTTOM
             Layout(
-                Panel("🐍 [b u]Developed with[/b u]: Python \n\n😎 [b u]Copyright[/b u]: 2022 (Atharva Shah, Ali, gurjas, aditya )\n\n✅ [b u]Language Support[/b u]: English", border_style="red")
+                Panel("🐍 [b u]Developed with[/b u]: Python \n\n😎 [b u]Copyright[/b u]: 2022 (Atharva Shah, Ali, gurjas, aditya)\n\n✅ [b u]Language Support[/b u]: English", border_style="red")
             )
     )
 
     print(layout)
+    
 
+    
+# ========================#
+# Call of funtions        #
+# ========================#
+
+#start cli
 console = Console(record=False, color_system="truecolor")
 print_banner(console)
 print_about_app()
-# # sourcery skip: inline-immediately-returned-variable
+# sourcery skip: inline-immediately-returned-variable
 
+# ========================#
+print(Panel.fit("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]"))
+organization=input()
 
-
-# print(Panel.fit("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]"))
-# organization=input()
-
-
-# if os.path.exists(path=f'CSVs/{organization}.csv'):
-#     print(f"Found {organization}.csv")
+# ========================#
+if os.path.exists(path=f'CSVs/{organization}.csv'):
+    print(f"Found {organization}.csv")
     
-# else:
-#     articles=scrape_news(organization)
-#     write_to_csv(organization, articles)
+else:
+    articles=scrape_news(organization)
+    write_to_csv(organization, articles)
 
+# ========================#
+if os.path.exists(path=f'CSVs/{organization}-processed.csv'):
+    print(f"Found {organization}-processed.csv")
+else:
+    process_csv(organization)
 
-# if os.path.exists(path=f'CSVs/{organization}-processed.csv'):
-#     print(f"Found {organization}-processed.csv")
-# else:
-#     process_csv(organization)
+file1=f'CSVs/{organization}.csv'
+file2=f'CSVs/{organization}-processed.csv'
+merge_csv(file1, file2, organization)
 
-# file1=f'CSVs/{organization}.csv'
-# file2=f'CSVs/{organization}-processed.csv'
-# merge_csv(file1, file2, organization)
+final_cleanup('zomato')
+final_cleanup('zomato')
 
-# final_cleanup('zomato')
-# final_cleanup('zomato')
-
-get_sub_url('zomato')
-# visualize(organization)
+# get_sub_url('zomato')
+visualize(organization)
 
 

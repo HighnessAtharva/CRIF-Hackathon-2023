@@ -1,12 +1,14 @@
+## Description: Visualize the named entities in the news articles
+#import libraries
 import csv
 import spacy
 from spacy import displacy
-
+#load the model
 nlp = spacy.load("en_core_web_trf")
-
+#function to visualize the named entities
 def visualize(organization):
     raw_text = ''
-    with open('CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
+    with open(f'CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)
         
@@ -18,5 +20,5 @@ def visualize(organization):
         displacy.serve(nlp_text, style="ent")
         
         
-        
-visualize()
+#call the function
+visualize('pitchfork')
