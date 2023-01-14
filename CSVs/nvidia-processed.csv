@@ -1,0 +1,69 @@
+Article,Headline,Headline Sentiment,Offense Rating,Negative Words,Offensive Words,Tags
+1,NVIDIA RTX 4070 Ti leaks reveal specs and potential price,Somewhat Negative,120,"['rumors', 'rumors', 'delayed']",[],[]
+2,NVIDIA's GeForce Now game streaming is coming to cars,Extremely Positive,50,['costly'],['backseat'],[]
+3,ASUS is bringing more Nebula Displays and better cooling to its gaming laptops,Extremely Positive,30,"['SCAR', 'SCAR', 'expensive', 'glare']",[],[]
+4,Samsung's 2023 Freestyle can combine projections from two units into a massive image,Extremely Positive,0,[],[],[]
+5,The Morning After: Samsung’s latest mobile screen prototype slides and folds,Extremely Positive,650,"['tired', 'missed', 'Disgraced', 'guilty', 'leak', 'limited', 'pricey', 'costly', 'bump', 'anxiety', 'strangely', 'slower', 'hard', 'risk', 'mess', 'deficiencies']","['fraud', 'beast', 'pee', 'pee', 'toilet', 'toilet', 'urine', 'urine', 'urine', 'urine']","[Mat, Smith, Sam, BankmanFried]"
+6,Foxconn to use Nvidia chips to build self-driving vehicle platforms,Extremely Positive,20,"['struggled', 'difficulties']",[],[]
+7,Dell's Latest Budget Gaming Laptops Are Surprisingly Exciting,Extremely Positive,10,['chunky'],[],[]
+8,"LG's updated Grams get thinner, add OLED and 'hidden touchpads'",Extremely Positive,30,"['bump', 'touts', 'Unfortunately', 'issues']",[],[]
+9,Nvidia Launches GeForce NOW 'Ultimate' Tier With RTX 4080 GPU for Cloud Gaming at 240 Frames Per Second,Extremely Positive,40,"['delayed', 'broken', 'resistance', 'rumors', 'rumor']",[],"[MingChi, Kuo, Kuo, Mark, Gurman, Mark, Gurman, Gurman, MingChi, Kuo, Kuo]"
+10,Here Are the Best Laptops CES 2023 Has to Offer,Extremely Positive,20,"['drastically', 'problem', 'balk']",[],[]
+11,Nvidia unveils GeForce RTX 40 Series GPUs for laptops,Extremely Positive,110,"['fall', 'Plague', 'vice', 'fall', 'dark', 'idle', 'Chaos', 'radically', 'limited', 'impossible', 'intense', 'vice']",[],"[Jeff, Fisher, Fisher, Fisher, Fisher, Stephanie, Johnson, Johnson]"
+12,Nvidia boosts generative AI for biology with BioNeMo,Extremely Positive,150,['critical'],"['diseases', 'drug', 'drug']","[Kimberly, Powell, Powell, Powell]"
+13,ASUS' latest Zenbook Pro 16X OLED has more space to stay cool,Extremely Positive,0,[],[],[]
+14,ASUS went with ceramic for its new Zenbook 14X OLED laptop,Extremely Positive,50,"['downside', 'bump', 'noise', 'disappointed', 'hard', 'upset']",[],[]
+15,Razer rounds out its laptop line with the high-spec Blade 16 and Blade 18,Extremely Negative,300,"['stranger', 'limit', 'downside', 'annoyance', 'clunky', 'Unfortunately']",['burn'],[]
+16,"Samsung's latest gaming monitors include an 8K, 57-inch ultra-wide display",Extremely Positive,100,['glare'],"['whites', 'blacks']",[]
+17,"
+							AMD, NVDA and 1 Other Semiconductor Stock to Sell Before 2023",Extremely Positive,310,"['recessionary', 'decline', 'falling', 'waning', 'conflict', 'deterioration', 'weakening', 'decline', 'bleak', 'weak', 'fell', 'decline', 'decline', 'weak', 'proprietary', 'loss', 'decline', 'poor', 'proprietary', 'debt', 'loss', 'loss', 'loss', 'negative', 'lost', 'weak', 'proprietary']",['fear'],"[Mark, Liu, Shweta, Kumari]"
+18,"
+							1 Stock That Proves You Shouldn't Buy What You Know",Extremely Negative,430,"['fell', 'loss', 'implication', 'suffered', 'severe', 'decline', 'slowed', 'Disappointing', 'decline', 'decline', 'decline', 'Bleak', 'proprietary', 'weak', 'disappointing']",[],"['lawsuit', 'lawsuit', 'lawsuit', Dipanjan, Banchur, Dipanjan, Dipanjan]"
+19,"
+							NVIDIA vs. Taiwan Semi: Which Chip Stock Is the Better Buy in 2023",Extremely Positive,80,"['shortage', 'Limited', 'lost', 'marginally', 'vice', 'marginally', 'fall', 'proprietary', 'bleak']",[],"[L., C., Lu, Riddhima, Chakraborty, Riddhima]"
+20,You're Gonna Need a Bigger Desk: Samsung's New Gaming Monitor Is a Beast,Extremely Positive,50,"['limited', 'bad', 'bumped', 'mundane', 'commonplace', 'unspecified']",[],[]
+21,Acer's Newest Gaming Laptops Have Huge 16- and 18-inch Display Options,Extremely Positive,0,[],[],[]
+22,The Razer Blade 16 Doesn't Make You Choose Between 4K and a High FPS,Somewhat Negative,120,"['insignificant', 'remorse', 'restricted']",[],[]
+23,Asus Joins the 18-inch Gaming Laptop Club,Extremely Positive,50,"['Scar', 'dimmer', 'bumped', 'expensive', 'Sadly', 'clunky']",[],[]
+24,MSI aims to reign supreme with trio of custom GeForce RTX 4070 Ti graphics cards,Extremely Positive,40,"['gritty', 'broke', 'bad', 'touts', 'static']",[],[]
+25,"
+		It feels like Nvidia is gaslighting us with this ‘new’ GPU	",Extremely Positive,60,"['hype', 'rumors', 'problems', 'overpriced', 'missed', 'pretend', 'bad']",[],"[Jeff, Fisher, Nvidias]"
+26,"
+		Nvidia brings the mighty RTX 4090 to laptops at CES 2023	",Extremely Positive,0,[],[],[]
+27,"
+		CES 2023: Nvidia GeForce Now is coming to internet-enabled cars	",Extremely Positive,50,['unexpected'],['backseat'],[]
+28,Alienware's 500Hz Gaming Monitor Might Be the Fastest at CES,Somewhat Positive,20,"['hard', 'restricted']",[],[]
+29,Alienware Unveils Its Thinnest and Most Powerful Gaming Laptops Yet,Extremely Positive,0,[],[],[]
+30,Alienware Unveils Its Thinnest and Most Powerful Gaming Laptops Yet,Extremely Positive,0,[],[],[]
+31,"If your Internet is good enough, GeForce NOW Ultimate will stream games at 4K and 240 FPS",Extremely Positive,0,[],[],[]
+32,"
+		The first RTX 4070 Ti preorders confirm our worst fears	",Extremely Positive,140,"['Unfortunately', 'expensive', 'ridiculous', 'cheap', 'expensive', 'Rumors', 'expensive', 'disaster', 'jeopardy', 'odd']",['gun'],[]
+33,The Worst Hacks of 2022,Extremely Negative,1000,"['uneasy', 'perplexing', 'attacks', 'vicious', 'subvert', 'worst', 'leaks', 'attacks', 'bizarre', 'unpredictable', 'brutal', 'attacks', 'stealing', 'destructive', 'ravage', 'dangerous', 'hacks', 'destruction', 'breach', 'bombardment', 'pain', 'passive', 'attacks', 'disruptive', 'hacks', 'malicious', 'fake', 'steal', 'rampage', 'suffered', 'breach', 'breach', 'breach', 'stole', 'menace', 'disappointed', 'frustrated', 'attacks', 'rampage', 'vulnerable', 'Vice', 'attacks', 'showdown', 'refused', 'Vice', 'warning', 'threat', 'critical', 'Critical', 'extortion', 'intense', 'stealing', 'leaking', 'extortion', 'mercilessly', 'breach', 'steal', 'stolen', 'attacks', 'proprietary', 'proprietary', 'weak', 'risk', 'stolen', 'attacks', 'break']",[],"['lawsuit', 'lawsuit', 'lawsuit', 'lawsuit', 'lawsuit', Karim, Toubba]"
+34,BMW Motorrad x NVIDIA electric bike has swappable modules for flexibility of use,Extremely Positive,0,[],[],"[Aaryaman, Mistry, Aaryman]"
+35,"
+        Nvidia RTX 4070 Ti officially announced, will ""max out"" 1440p monitors
+
+  ",Extremely Positive,30,"['confusing', 'protracted', 'wrong', 'doubt']",[],"[James, ed, James]"
+36,"
+  These four chip stocks could double from here, according to Rosenblatt
+",Generally Neutral,50,"['lost', 'cracked', 'decline', 'flak', 'crazy', 'skepticism']",[],"[Mosesmann, Mosesmann]"
+37,Acer launches Nitro and Swift gaming laptops with AMD Ryzen 7000 processors,Extremely Positive,20,"['Noise', 'noise']",[],[]
+38,"
+		Nvidia RTX 4070 Ti review: not the GPU you’re looking for	",Extremely Negative,760,"['fails', 'Poor', 'controversy', 'odd', 'suffers', 'losing', 'cry', 'expensive', 'concern', 'problem', 'slower', 'stress', 'slower', 'slower', 'stress', 'slower', 'slower', 'expensive', 'fails', 'slower', 'measly', 'limit', 'precarious', 'bad', 'falling', 'expensive', 'bad', 'poor', 'slower', 'limitations', 'hard', 'limited', 'loss', 'limit', 'loud', 'overpriced', 'smash', 'evils', 'odd']","['dive', 'fight', 'blow']","['lawsuit', Miles, Morales, Ada, Lovelace]"
+39,"
+							3 Stocks to Be Sure to Avoid This Week",Extremely Negative,470,"['aggressive', 'recession', 'hard', 'hawkish', 'bearish', 'downturn', 'warned', 'recession', 'recession', 'pessimistic', 'weak', 'fell', 'decline', 'decline', 'weak', 'proprietary', 'loss', 'loss', 'loss', 'decline', 'lost', 'bleak', 'proprietary', 'loss', 'loss', 'loss', 'decline', 'weak']",[],"[Kristalina, Georgieva, Shweta, Kumari]"
+40,Dell's Latest Budget Gaming Laptops Are Surprisingly Exciting,Extremely Positive,10,['chunky'],[],[]
+41,NVIDIA Showcases New GeForce RTX 40 Series laptops,Extremely Positive,0,[],[],[]
+42,No-one's buying (new) graphics cards,Extremely Negative,210,"['crashed', 'bad']",[],[]
+43,NVIDIA GeForce RTX 40 graphics enable powerful tools for creators,Extremely Positive,10,['break'],[],[]
+44,NVIDIA GeForce Now gaining RTX 4080 support and coming to cars,Extremely Positive,60,"['dubious', 'problem']",['stupid'],"[Sean, Endicott, Zachary, Boddy, They, Them, Zachary, Zachary]"
+45,NVIDIA upgrading GeForce Now in 2023 — RTX 4080 GPUs bring 4K gaming and more,Extremely Positive,130,"['hefty', 'drawbacks', 'restricted', 'problem']","['Fear', 'Fear']","[Andrew, Fear, Andrew, Fear, Ada, Lovelace, Ben]"
+46,Nvidia RTX 4070 Ti Launches This Week,Extremely Positive,30,"['expensive', 'expensive', 'complaints', 'inevitably']",[],[]
+47,The Best Gaming Gear at CES: From Powerhouse Laptops to the Widest Monitors,Extremely Positive,70,"['weird', 'chunky', 'Scar', 'Scar', 'Scar', 'Scar', 'hard', 'Twisted']",[],[]
+48,ASUS updates its ROG Zephyrus gaming laptops with NVIDIA RTX 40 series graphics,Extremely Positive,80,"['ludicrous', 'absurdly', 'limited', 'problem']",['addict'],"[Richard, Devine]"
+49,CES 2023 preview: What to expect at the Las Vegas tech extravaganza,Extremely Positive,600,"['toll', 'recession', 'critical', 'vice', 'losers', 'invisible', 'concerned', 'encroachment', 'threaten', 'hurt', 'fake', 'worried', 'fall', 'creeping', 'pervasive', 'worn', 'losing', 'problem', 'falls', 'fallen', 'wasted', 'spoilage', 'Weird', 'noise', 'weird', 'stress', 'smell', 'blemish']","['brothel', 'sex', 'urine', 'pee', 'urinate', 'urine']","[Gary, Shapiro, Steve, Koenig, Shapiro, Shapiro, Shapiro, Alice, Little, 'lawsuit', John, May, Shapiro, Shapiro, Lisa, Su, Arnold, Donald]"
+50,Acer announces Aspire laptops and All-in-One with 13th Gen Intel CPUs,Extremely Positive,10,['problem'],[],"[Sean, Endicott, Ben, WilsonChannel]"
+51,Graphics card prices are ridiculous — that's (one reason) why I'm backing Intel,Extremely Negative,470,"['ridiculous', 'problem', 'tired', 'wrong', 'insanely', 'expensive', 'crazy', 'expensive', 'dead', 'expensive', 'expensive', 'worry', 'expensive', 'expensive', 'drawbacks', 'underdog', 'expensive', 'problem']","['Hell', 'addict']","[Jensen, Huang, Richard, Devine]"
+52,"CES 2023 roundup: NVIDIA 4070 Ti, AMD Ryzen 7000, 13th Gen Intel, and PCs from Lenovo, Razer, HP, ASUS, and more",Extremely Positive,130,"['irked', 'overpriced', 'controversial', 'confusing', 'broke', 'broke', 'Twist', 'broken', 'difficult', 'hard', 'problem']",[],"['lawsuit', Richard, Devine, Ben, Wilson, Rebecca, Spear, Richard, Devine, Sean, Endicott]"
+53,This year's blockbuster IPO is between a rock and a hard place: listing in New York or London won't change Arm's fortunes in brutal downturn,Somewhat Negative,630,"['hard', 'brutal', 'downturn', 'tricky', 'brutal', 'downturn', 'worse', 'brutal', 'downturns', 'fell', 'intense', 'losses', 'futile', 'proprietary', 'fraught', 'risk', 'brutal', 'downturn', 'turbulent', 'fell', 'fell', 'creeping', 'volatile', 'rough', 'tumble', 'hesitant', 'laid', 'headaches', 'unlikely', 'concerns', 'unlikely', 'turmoil', 'lies', 'bruising', 'suffer', 'fell', 'warned', 'unable', 'fears', 'spook', 'fall', 'hard', 'treacherous', 'falls']","['fear', 'Communist']","[Masayoshi, Son, Rishi, Sunak, Jack, Ma, Elon, Musk, Musk, Ian, Thorton, Arms, Jack, Ma]"
+54,NVIDIA relaunches 12GB RTX 4080 as the RTX 4070 Ti for $799,Extremely Negative,210,"['issue', 'problem']",[],"[Harish, Jonnalagadda]"

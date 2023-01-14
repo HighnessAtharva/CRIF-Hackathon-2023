@@ -1,3 +1,4 @@
+#Importing Libraries
 import contextlib
 import csv
 import trafilatura
@@ -32,9 +33,9 @@ from rich.text import Text
 
 
 
-# =========================
-# UTIL FUNCTIONS          #
-# =========================
+# =========================#
+# UTIL FUNCTIONS           #
+# =========================#
 def parse_text_from_web(webURL: str) -> str:
     """Extracts the text from the main content of the web page. Removes the ads, comments, navigation bar, footer, html tags, etc
     Args:
@@ -54,6 +55,9 @@ def parse_text_from_web(webURL: str) -> str:
     except Exception as e:
         pass
 
+# =========================#
+# cleanup FUNCTIONS        #
+# =========================#
 def cleanup_text(text: str) -> str:
     """Clean up the text by removing special characters, numbers, whitespaces, etc for further processing and to improve the accuracy of the model.
     Args:
@@ -81,9 +85,9 @@ def cleanup_text(text: str) -> str:
 
 
 
-# =========================
+# ========================#
 # SCRAPING                #
-# =========================
+# ========================#
 def scrape_news(organization: str) -> list:
     # sourcery skip: inline-immediately-returned-variable
     
@@ -94,7 +98,7 @@ def scrape_news(organization: str) -> list:
         newsapi = NewsApiClient(api_key=api_key)
 
         # get TOP articles, 1st page, grab 25 articles
-        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=30)
+        all_articles = newsapi.get_everything(q=organization, from_param='2022-12-20', to='2023-01-12', language='en', sort_by='relevancy', page=1, page_size=100)
 
         return all_articles
     
@@ -111,19 +115,19 @@ def scrape_news(organization: str) -> list:
 def write_to_csv(organization: str, all_articles: dict) -> None:
     with open(f'CSVs/{organization}.csv', 'w', encoding='utf-8', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["Article", "Title", "Description",  "URL", "Content"])
+        writer.writerow(["Article", "Title", "Description",  "URL", "Content", "Published"])
 
         for idx, article in enumerate(all_articles['articles']):
             title= article['title'].strip()
             description= article['description'].strip()
-            # publishedAt= article['publishedAt']
+            publishedAt= article['publishedAt']
             newsURL= article['url']
             
             content= parse_text_from_web(newsURL)
             content=cleanup_text(content)
         
             # download the content from the url
-            writer.writerow([idx, article['title'], article['description'], article['url'], content])
+            writer.writerow([idx, article['title'], article['description'], article['url'], content, publishedAt])
             
             print(f"[bold]Wrote {idx} -{title} to {organization}.csv[/bold]")
             
@@ -131,9 +135,9 @@ def write_to_csv(organization: str, all_articles: dict) -> None:
     
     
 
-# =========================
-# SENTIMENT              #
-# =========================
+# ========================#
+# SENTIMENT scoring       #
+# ========================#
 
 def get_headline(content):
     r = requests.get(content)
@@ -184,8 +188,8 @@ def sentiment_analysis(content: str) -> None:
     sentiment_score = int(torch.argmax(result.logits))+1
     return sentiment_score_to_summary(sentiment_score)
 
-
-def process_csv(organization):  # sourcery skip: identity-comprehension
+# sourcery skip: identity-comprehension
+def process_csv(organization):  
 
     with open ('negative_words.txt', 'r', encoding='utf-8') as file:
         negative_words_list = file.read().splitlines()
@@ -203,7 +207,10 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
         harassment = file.read().splitlines()
 
 
-
+    #definig charset
+# ========================#
+# Creating Final csv      #
+# ========================#
     with open(f'CSVs/{organization}-processed.csv', 'w', encoding='utf-8', newline='') as summary:
         
         # read first row from Uber.csv
@@ -231,10 +238,10 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
                     offensive_words=[]
                     tags=[]
                     
-                    
+                    # init ofense rating
                     offense_rating=0
                     
-
+                    # tag as negative
                     if headline_sentiment=="Somewhat Negative":
                         offense_rating+=100
                     
@@ -296,7 +303,9 @@ def process_csv(organization):  # sourcery skip: identity-comprehension
                 print(e.__doc__)
                 print(e.__traceback__)
                 
-
+# ========================#
+# Display temp output     #
+# ========================#
 def visualize(organization):
     raw_text = ''
     with open('CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
@@ -310,6 +319,9 @@ def visualize(organization):
         nlp_text = nlp(raw_text)
         displacy.serve(nlp_text, style="ent")
 
+# ========================#
+# Merging Raw data        #
+# ========================#
 def merge_csv(csv1, csv2, organization):
     import pandas as pd
     df1 = pd.read_csv(csv1)
@@ -318,8 +330,11 @@ def merge_csv(csv1, csv2, organization):
     df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
     print(f"CSVs merged to {organization}-ANALYSIS.csv")
     
-    
-    
+
+      
+# ========================#
+# cleaing up -2           #
+# ========================#   
 # RUN SAME FUNCTION TWICE 
 def final_cleanup(organization):
     import pandas as pd
@@ -344,10 +359,29 @@ def final_cleanup(organization):
     # clean up negative words
     df['Negative Words'] = df['Negative Words'].str.replace('[', '').str.replace(']', '').str.replace("'", '')
     
-   
-    
-    
     df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
+   
+def get_sub_url(organization):
+    publisher=[]
+    with open (f'CSVs/{organization}-ANALYSIS.csv', 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        url = [row[3] for row in reader]
+        # remove www. and https:// from url
+        url = [re.sub(r'www.', '', i) for i in url]
+        url = [re.sub(r'https://', '', i) for i in url]
+        for x in url:
+            name= x.split('.com/')[0]
+            publisher.append(name)
+                
+    # replace items from publisher where character length is more than 40 with '-'
+    publisher = [re.sub(r'.{40,}', '-', i) for i in publisher]         
+    # print(publisher)
+    
+    # save the cleaned up publisher list to a csv
+    with open (f'CSVs/{organization}-ANALYSIS.csv', 'w', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(publisher)
+    
     print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")
     
 # sourcery skip: identity-comprehension
@@ -355,6 +389,9 @@ nlp = spacy.load("en_core_web_trf")
 
 
 
+# ========================#
+# Console Output          #
+# ========================#
 
 # no tests for this function as it is not called anywhere in the command directly
 def get_terminal_width() -> int:
@@ -421,19 +458,8 @@ def print_about_app()->None:
     highlight=True
     )
 
-
-    footer_content = Panel(
-        renderable="\n    👩‍💻 [b reverse]Source[/b reverse]: [link=https://github.com/HighnessAtharva/VocabularyBuilderCLI]GitHub[/link]\t\t\t    📚 [b reverse]Docs[/b reverse]: [link=https://github.com/HighnessAtharva/VocabularyBuilderCLI]Read[/link]\t\t\t   🌐 [b reverse]Website[/b reverse]: [link=https://vocabcli.github.io/]Explore[/link]\t\t\t   🚀 [b reverse]Demo[/b reverse]: [link=https://vocabcli.github.io/]View[/link]\n",
-        title="[reverse]THANK YOU FOR USING THIS APP[/reverse]",
-        title_align="center",
-        border_style="bold violet",
-        padding=(1,0),
-        box= box.DOUBLE_EDGE,
-        highlight=True
-        )
-
     main_content = Panel(
-        renderable="[bold u]WE HAVE[/bold u]:\n\n[bold u green]",
+        renderable="[bold u]WE HAVE[/bold u]:\n\n[bold u green] 1.[/bold u green]Sentiment expression of the articles scraped  \n\n [bold u green]2.[/bold u green]Detailed info of threats to reputaion\n\n [bold u green]3.[/bold u green]Detailed csv file genrated\n\n [bold u green]4[/bold u green]Detailed dashboard ready to import the csv",
         title="[reverse]FEATURES[/reverse]",
         title_align="center",
         border_style="bold blue",
@@ -444,9 +470,8 @@ def print_about_app()->None:
 
     # Divide the "screen" in to three parts
     layout.split(
-        Layout(name="header", size=14),
-        Layout(name="main", size=18),
-        Layout(name="footer", size=6),
+        Layout(name="header", size=12),
+        Layout(name="main", size=16),
     )
 
     #HEADER
@@ -468,28 +493,23 @@ def print_about_app()->None:
     layout["side"].split(
             # SIDE CONTENT TOP
             Layout(
-               Panel(renderable="\t\t  💲💲💲 \n\n       [b u]DONATIONS AND SUPPORT IS WELCOME[/b u] \n\n    [b u]PLEASE VISIT OUR GITHUB SPONSORS PAGE[/b u] \n\n \t\t  💰💰💰", border_style="green")
+               Panel(renderable="\t\t  💲💲💲 \n\n       [b u]Features and Suggestions are WELCOME[/b u] \n\n    [b u]PLEASE VISIT OUR GITHUB PAGE[/b u] \n\n \t\t  💰💰💰", border_style="green")
             ),
 
             # SIDE CONTENT BOTTOM
             Layout(
-                Panel("🐍 [b u]Developed with[/b u]: Python, Typer, Rich, PyTest, Seaborn\n\n😎 [b u]Copyright[/b u]: 2022 (Atharva Shah, Anay Deshpande)\n\n✅ [b u]Language Support[/b u]: English", border_style="red")
+                Panel("🐍 [b u]Developed with[/b u]: Python \n\n😎 [b u]Copyright[/b u]: 2022 (Atharva Shah, Ali, gurjas, aditya )\n\n✅ [b u]Language Support[/b u]: English", border_style="red")
             )
     )
 
-    # FOOTER
-    layout["footer"].update(
-        footer_content
-    )
-
-
     print(layout)
 
-console = Console(record=False, color_system="truecolor")
+# console = Console(record=False, color_system="truecolor")
 # print_banner(console)
 # print_about_app()
-# # # # sourcery skip: inline-immediately-returned-variable
-# # print("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]")
+# # # sourcery skip: inline-immediately-returned-variable
+
+
 
 # print(Panel.fit("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]"))
 # organization=input()
@@ -512,8 +532,9 @@ console = Console(record=False, color_system="truecolor")
 # file2=f'CSVs/{organization}-processed.csv'
 # merge_csv(file1, file2, organization)
 
+# for x in ['marvel', 'bbc', 'cnbc', 'nvidia', 'meta']:
+# final_cleanup('marvel')
+get_sub_url('marvel')
+# visualize(organization)
 
-orgs=['Cadbury', 'crunchyroll', 'github', 'Meta', 'microsoft', 'parle', 'pitchfork', 'porter', 'reddit', 'reliance', 'snapchat', 'tinder', 'swiggy', 'tinder', 'twitch']
 
-for x in orgs:
-    final_cleanup(x)
