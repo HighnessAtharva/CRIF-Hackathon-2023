@@ -362,38 +362,35 @@ def final_cleanup(organization):
     df.to_csv(f'CSVs/{organization}-ANALYSIS.csv', index=False)
    
 def get_sub_url(organization):
-    publisher=[]
-    with open (f'CSVs/{organization}-ANALYSIS.csv', 'r', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        url = [row[3] for row in reader]
-        # remove www. and https:// from url
-        url = [re.sub(r'www.', '', i) for i in url]
-        url = [re.sub(r'https://', '', i) for i in url]
-        for x in url:
-            name= x.split('.com/')[0]
-            publisher.append(name)
-                
-    # replace items from publisher where character length is more than 40 with '-'
-    publisher = [re.sub(r'.{40,}', '-', i) for i in publisher]         
-    # print(publisher)
     
-    # save the cleaned up publisher list to a csv
-    with open (f'CSVs/{organization}-ANALYSIS.csv', 'w', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        # add a new column called publisher to the csv
-        writer.writerow(['Article', 'Headline', 'Sentiment', 'Offense Rating', 'Negative Words', 'Offensive Words', 'Tags', 'Publisher'])
+    with open (f'CSVs/{organization}-ANALYSIS.csv', 'r', encoding='utf-8') as f:
+        with open (f'CSVs/{organization}-ANALYSIS.csv', 'w', encoding='utf-8') as f2:
+            publisher=[]
+            reader = csv.reader(f)
+            url = [row[4] for row in reader]
+            # remove www. and https:// from url
+            url = [re.sub(r'www.', '', i) for i in url]
+            url = [re.sub(r'https://', '', i) for i in url]
+            for x in url:
+                name= x.split('.com/')[0]
+                publisher.append(name)
+                    
+            # replace items from publisher where character length is more than 40 with '-'
+            publisher = [re.sub(r'.{40,}', '-', i) for i in publisher]         
+            print(publisher)
+            
+            # # write publisher to csv
+            # writer = csv.writer(f2)
+            # writer.writerow(['Article', 'Headline', 'Sentiment', 'Offense Rating', 'Negative Words', 'Offensive Words', 'Tags', 'Publisher'])
+            
+            # # write all reader rows to csv
+            # for row in reader:
+            #     writer.writerow(row + [publisher])
+                
+    
+  
         
-        # article= [row[0] for row in reader]
-        # headline= [row[1] for row in reader]
-        # sentiment= [row[2] for row in reader] 
-        # offense_rating= [row[3] for row in reader]
-        # negative_words= [row[4] for row in reader]
-        # offensive_words= [row[5] for row in reader]
-        # tags= [row[6] for row in reader]
-        # publisher_new= [i for i in publisher]
-        # add the publisher list to the csv
-        for i in publisher:
-            writer.writerow([i])
+      
              
     
     print(f"CSVs cleaned up to {organization}-ANALYSIS.csv")
@@ -546,12 +543,11 @@ def print_about_app()->None:
 # file2=f'CSVs/{organization}-processed.csv'
 # merge_csv(file1, file2, organization)
 
-# for x in ['marvel', 'bbc', 'cnbc', 'nvidia']:
-final_cleanup('cnbc')
-final_cleanup('cnbc')
-final_cleanup('nvidia')
-final_cleanup('nvidia')
-# get_sub_url('marvel')
+# final_cleanup('cnbc')
+# final_cleanup('cnbc')
+# final_cleanup('nvidia')
+# final_cleanup('nvidia')
+get_sub_url('twitch')
 # visualize(organization)
 
 
