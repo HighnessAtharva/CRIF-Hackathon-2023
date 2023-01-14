@@ -308,7 +308,7 @@ def process_csv(organization):
 # ========================#
 def visualize(organization):
     raw_text = ''
-    with open('CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
+    with open(f'CSVs/{organization}.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)
         
@@ -378,15 +378,7 @@ def get_sub_url(organization):
             # replace items from publisher where character length is more than 40 with '-'
             publisher = [re.sub(r'.{40,}', '-', i) for i in publisher]         
             print(publisher)
-            
-            # # write publisher to csv
-            # writer = csv.writer(f2)
-            # writer.writerow(['Article', 'Headline', 'Sentiment', 'Offense Rating', 'Negative Words', 'Offensive Words', 'Tags', 'Publisher'])
-            
-            # # write all reader rows to csv
-            # for row in reader:
-            #     writer.writerow(row + [publisher])
-                
+    
     
   
         
@@ -515,10 +507,10 @@ def print_about_app()->None:
 
     print(layout)
 
-# console = Console(record=False, color_system="truecolor")
-# print_banner(console)
-# print_about_app()
-# # # sourcery skip: inline-immediately-returned-variable
+console = Console(record=False, color_system="truecolor")
+print_banner(console)
+print_about_app()
+# # sourcery skip: inline-immediately-returned-variable
 
 
 
@@ -543,11 +535,10 @@ def print_about_app()->None:
 # file2=f'CSVs/{organization}-processed.csv'
 # merge_csv(file1, file2, organization)
 
-# final_cleanup('cnbc')
-# final_cleanup('cnbc')
-# final_cleanup('nvidia')
-# final_cleanup('nvidia')
-get_sub_url('twitch')
+# final_cleanup('zomato')
+# final_cleanup('zomato')
+
+get_sub_url('zomato')
 # visualize(organization)
 
 
