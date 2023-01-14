@@ -1,10 +1,10 @@
+import contextlib
 import csv
 import trafilatura
 import re
 from newsapi import NewsApiClient
 from rich import print
 import os
-import csv
 import spacy
 from spacy import displacy
 import requests
@@ -14,6 +14,22 @@ from bs4 import BeautifulSoup
 from spacy.lang.en.stop_words import STOP_WORDS
 from spacytextblob.spacytextblob import SpacyTextBlob
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from rich import print
+from rich import box
+from rich.console import Console
+from rich.layout import Layout
+from rich.panel import Panel
+from rich.align import Align
+import time
+from rich.progress import track
+from rich.syntax import Syntax
+import os
+from platform import system, platform
+from rich.align import Align
+from rich.panel import Panel
+from rich.text import Text
+
+
 
 
 # =========================
@@ -47,12 +63,12 @@ def cleanup_text(text: str) -> str:
     """
 
     # text = re.sub(r'\d+', '', text)  # remove numbers
-    
+
     # text = re.sub(r'\s+', ' ', text)  # remove whitespaces
-    try:
+    with contextlib.suppress(Exception):
         # remove special characters except full stop and apostrophe
         text = re.sub(r'[^a-zA-Z0-9\s.]', '', text)
-        
+
         # text = text.lower()  # convert text to lowercase
         text = text.strip()  # remove leading and trailing whitespaces
         text = text.encode('ascii', 'ignore').decode('ascii')  # remove non-ascii characters
@@ -62,8 +78,6 @@ def cleanup_text(text: str) -> str:
 
         text= ' '.join(text)
         return text.replace(' .', '.')
-    except Exception as e:
-        pass
 
 
 
@@ -339,31 +353,167 @@ def final_cleanup(organization):
 # sourcery skip: identity-comprehension
 nlp = spacy.load("en_core_web_trf")
 
-import os
 
-# # sourcery skip: inline-immediately-returned-variable
-print("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]")
-organization=input()
 
-if os.path.exists(path=f'CSVs/{organization}.csv'):
-    print(f"Found {organization}.csv")
+
+# no tests for this function as it is not called anywhere in the command directly
+def get_terminal_width() -> int:
+    """
+    Gets the width of the terminal.
+    Returns: 
+        int: width of the terminal.
+    """
+    try:
+        width, _ = os.get_terminal_size()
+    except OSError:
+        width = 80
+
+    if system().lower() == "windows":
+        width -= 1
+
+    return width
+
+
+def print_banner(console) -> None:
+    """
+    Prints the banner of the application.
+    Args:
+        console (Console): Rich console object.
+    """
+
+    banner = """
+::::    ::::  :::::::::: ::::::::: :::::::::::     :::              :::     ::::    :::     :::     :::     :::   :::  :::::::: ::::::::::: ::::::::  
++:+:+: :+:+:+ :+:        :+:    :+:    :+:       :+: :+:          :+: :+:   :+:+:   :+:   :+: :+:   :+:     :+:   :+: :+:    :+:    :+:    :+:    :+: 
++:+ +:+:+ +:+ +:+        +:+    +:+    +:+      +:+   +:+        +:+   +:+  :+:+:+  +:+  +:+   +:+  +:+      +:+ +:+  +:+           +:+    +:+        
++#+  +:+  +#+ +#++:++#   +#+    +:+    +#+     +#++:++#++:      +#++:++#++: +#+ +:+ +#+ +#++:++#++: +#+       +#++:   +#++:++#++    +#+    +#++:++#++ 
++#+       +#+ +#+        +#+    +#+    +#+     +#+     +#+      +#+     +#+ +#+  +#+#+# +#+     +#+ +#+        +#+           +#+    +#+           +#+ 
+#+#       #+# #+#        #+#    #+#    #+#     #+#     #+#      #+#     #+# #+#   #+#+# #+#     #+# #+#        #+#    #+#    #+#    #+#    #+#    #+# 
+###       ### ########## ######### ########### ###     ###      ###     ### ###    #### ###     ### ########## ###     ######## ########### ########  
+            """
+    width = get_terminal_width()
+    height = 10
+
+    panel = Panel(
+        Align(
+            Text(banner, style="green"),
+            vertical="middle",
+            align="center",
+        ),
+        width=width,
+        height=height,
+        subtitle=f"[bold blue]Built for CRIF Hackathon 2023![/bold blue]",
+    )
+    console.print(panel)
+
+
+def print_about_app()->None:
+    """Prints the details of the app"""
+
+    layout = Layout()  
     
-else:
-    articles=scrape_news(organization)
-    write_to_csv(organization, articles)
+    header_content =  Panel(
+    renderable="📚 [gold1 bold]Media Analysis[/gold1 bold] is a [i u]Command Line Interface[/i u] that allows users to know the reputational  threats for an given company. The application uses top seo pages and a fixed amount of articles provided by an opensource NewsApi and uses a nlp model to analyze the articles and the sentiments expressed through them. These sentiments are being assesd by fixed model of words where the articles is checked for some presence specific list of words and then specific sentiment score is added. For example if words like lawsuite or loss are encountered then the negative sentiment score is added. Finall score concludes the article as Extremely positive or negative and other related sentiments  ",
+    title="[reverse]ABOUT Media Analysis CLI[/reverse]",
+    title_align="center",
+    border_style="bold green",
+    padding=(1,1),
+    box= box.DOUBLE_EDGE,
+    highlight=True
+    )
 
 
-if os.path.exists(path=f'CSVs/{organization}-processed.csv'):
-    print(f"Found {organization}-processed.csv")
-else:
-    process_csv(organization)
+    footer_content = Panel(
+        renderable="\n    👩‍💻 [b reverse]Source[/b reverse]: [link=https://github.com/HighnessAtharva/VocabularyBuilderCLI]GitHub[/link]\t\t\t    📚 [b reverse]Docs[/b reverse]: [link=https://github.com/HighnessAtharva/VocabularyBuilderCLI]Read[/link]\t\t\t   🌐 [b reverse]Website[/b reverse]: [link=https://vocabcli.github.io/]Explore[/link]\t\t\t   🚀 [b reverse]Demo[/b reverse]: [link=https://vocabcli.github.io/]View[/link]\n",
+        title="[reverse]THANK YOU FOR USING THIS APP[/reverse]",
+        title_align="center",
+        border_style="bold violet",
+        padding=(1,0),
+        box= box.DOUBLE_EDGE,
+        highlight=True
+        )
 
-file1=f'CSVs/{organization}.csv'
-file2=f'CSVs/{organization}-processed.csv'
-merge_csv(file1, file2, organization)
+    main_content = Panel(
+        renderable="[bold u]WE HAVE[/bold u]:\n\n[bold u green]",
+        title="[reverse]FEATURES[/reverse]",
+        title_align="center",
+        border_style="bold blue",
+        padding=(1,1),
+        box= box.DOUBLE_EDGE,
+        )
 
 
-orgranizations= ['snapchat', 'reddit', 'reliance', 'swiggy', 'tinder', 'titan', 'twitch']
+    # Divide the "screen" in to three parts
+    layout.split(
+        Layout(name="header", size=14),
+        Layout(name="main", size=18),
+        Layout(name="footer", size=6),
+    )
 
-for org in orgranizations:
-    final_cleanup(org)
+    #HEADER
+    layout["header"].update(
+    header_content
+    )
+
+
+    # MAIN CONTENT
+    layout["main"].split_row(
+        Layout(name="side",),
+        Layout(
+            main_content,
+            name="body", ratio=2),
+    )
+
+
+    # SIDE CONTENT
+    layout["side"].split(
+            # SIDE CONTENT TOP
+            Layout(
+               Panel(renderable="\t\t  💲💲💲 \n\n       [b u]DONATIONS AND SUPPORT IS WELCOME[/b u] \n\n    [b u]PLEASE VISIT OUR GITHUB SPONSORS PAGE[/b u] \n\n \t\t  💰💰💰", border_style="green")
+            ),
+
+            # SIDE CONTENT BOTTOM
+            Layout(
+                Panel("🐍 [b u]Developed with[/b u]: Python, Typer, Rich, PyTest, Seaborn\n\n😎 [b u]Copyright[/b u]: 2022 (Atharva Shah, Anay Deshpande)\n\n✅ [b u]Language Support[/b u]: English", border_style="red")
+            )
+    )
+
+    # FOOTER
+    layout["footer"].update(
+        footer_content
+    )
+
+
+    print(layout)
+
+console = Console(record=False, color_system="truecolor")
+# print_banner(console)
+# print_about_app()
+# # # # sourcery skip: inline-immediately-returned-variable
+# # print("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]")
+
+# print(Panel.fit("[bold green reverse]ENTER AN ORGANIATION NAME TO PERFORM MEDIA ANALYSIS ON[/bold green reverse]"))
+# organization=input()
+
+
+# if os.path.exists(path=f'CSVs/{organization}.csv'):
+#     print(f"Found {organization}.csv")
+    
+# else:
+#     articles=scrape_news(organization)
+#     write_to_csv(organization, articles)
+
+
+# if os.path.exists(path=f'CSVs/{organization}-processed.csv'):
+#     print(f"Found {organization}-processed.csv")
+# else:
+#     process_csv(organization)
+
+# file1=f'CSVs/{organization}.csv'
+# file2=f'CSVs/{organization}-processed.csv'
+# merge_csv(file1, file2, organization)
+
+
+orgs=['Cadbury', 'crunchyroll', 'github', 'Meta', 'microsoft', 'parle', 'pitchfork', 'porter', 'reddit', 'reliance', 'snapchat', 'tinder', 'swiggy', 'tinder', 'twitch']
+
+for x in orgs:
+    final_cleanup(x)
