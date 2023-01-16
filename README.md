@@ -2,6 +2,7 @@
 
 
 
+
 ## Problem Statement
 
 ### Media Analytics
@@ -35,6 +36,7 @@ Display these relationships in an appropriate Dashboard => PowerBI / Tableau
 
 4. Aditya Patil - Documentation, Testing and and Generating Tableau Dashboards
 
+![CRIF-TEAM](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/CRIF%202.jpg)
    
 
 ## Work
@@ -61,9 +63,28 @@ Having prior experience with BeautifulSoup, APIs and Spacy for NLP I immidiately
 
 Spent the most time with this. Most CSVs that made the final 
 
+![MODULE 1](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module1.png)
+![MODULE 2](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module2.png)
+![MODULE 3](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module3.png)
+
 **Tableau** - Taking input of the `COMMON-ANALYSIS.csv` file, we designed 8 dashboards to present or narrate a story with all our data. Since we had plenty of fields like `Article Count`, `Title`,` Description`, `Content` (which holds the entire article text), `URL`, `Publisher`, `Published Date`, `Headline`, `Headline Sentiment`, `Offensive Rating`, `Negative Words`, `Offensive Words and Tags` it was not much of a hassle. We made good use of several plotting and graphing methods and presented a diverse yet insightful story. Each Tableau report updates after looking up a new organization.  
 
-
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.1.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.2.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.3.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.4.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.5.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.6.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.7.png)
+![VISUALIZATION](
+https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/module4.8.png)
 
 ### Obstacles, Setbacks and Challenges faced
 
@@ -92,5 +113,6 @@ With the prestige and recognition we also recieved:-
 - Victory Certificate for each team member
 - A "winner takes it all" trophy
 
+![CRIF-TEAM](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/CRIF%201.jpeg)
 
 
