@@ -36,8 +36,7 @@ Display these relationships in an appropriate Dashboard => PowerBI / Tableau
 
 4. Aditya Patil - Documentation, Testing and and Generating Tableau Dashboards
 
-![CRIF-TEAM](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/CRIF%202.jpg)
-   
+
 
 ## Work
 
@@ -113,6 +112,5 @@ With the prestige and recognition we also recieved:-
 - Victory Certificate for each team member
 - A "winner takes it all" trophy
 
-![CRIF-TEAM](https://github.com/HighnessAtharva/CRIF-Hackathon-2023/blob/main/assets/CRIF%201.jpeg)
 
 
