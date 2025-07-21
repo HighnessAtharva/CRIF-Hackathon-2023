@@ -30,7 +30,7 @@ Display these relationships in an appropriate Dashboard => PowerBI / Tableau
 
 1. Atharva Shah (Yours Truly) - Implementation of the first three modules leveraging NLP, Text Processing, Web Scraping and Debugging. In-charge of leading the team and making the presentation in the final round
 
-2. Gurjas Gandhi - Administration, Mangement, Insightful Feedback
+2. Gurjas Gandhi - Administration, Mangement, Insightful Feedback,Generating Tableau Dashboards.
 
 3. Ali Asger Saifee - Problem Solving, Curating Word Lists and Generating Tableau Dashboards
 
